@@ -3,6 +3,9 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+
+use App\Models\Category;
+use App\Models\Product;
 use Spatie\Permission\Models\Role;
 use App\Models\User;
 use Illuminate\Database\Seeder;
@@ -32,5 +35,7 @@ class DatabaseSeeder extends Seeder
 
         $role_admin = Role::firstOrCreate(['name' => 'admin']);
         $user->assignRole($role_admin);
+        Category::factory(20)->create();
+        Product::factory(50)->create();
     }
 }
