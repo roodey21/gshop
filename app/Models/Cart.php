@@ -8,4 +8,25 @@ use Illuminate\Database\Eloquent\Model;
 class Cart extends Model
 {
     use HasFactory;
+
+    protected $fillable=[
+        'user_id',
+        'product_id',
+        'qty',
+    ];
+
+    public function product()
+    {
+        return $this->belongsTo(Product::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(USer::class);
+    }
+
+    public function getFormattedTotalAttribute()
+    {
+        return 'Rp. '.number_format($this->product->price * $this->qty, 0, ',', ',');
+    }
 }

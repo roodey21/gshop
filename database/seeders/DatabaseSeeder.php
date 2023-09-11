@@ -37,5 +37,9 @@ class DatabaseSeeder extends Seeder
         $user->assignRole($role_admin);
         Category::factory(20)->create();
         Product::factory(50)->create();
+        $this->call([
+            SiteSettingSeeder::class,
+            RoleUserSeeder::class,
+        ]);
     }
 }

@@ -261,6 +261,9 @@
                                         <a class="dropdown-item {{ (strpos(Route::currentRouteName(), 'admin.bank') === 0) ? 'active' : '' }}" href="{{ route('admin.bank.index') }}">
                                             Data Bank
                                         </a>
+                                        <a class="dropdown-item {{ (strpos(Route::currentRouteName(), 'admin.courier') === 0) ? 'active' : '' }}" href="{{ route('admin.courier.index') }}">
+                                            Data Kurir
+                                        </a>
                                     </div>
                                 </div>
                             </div>

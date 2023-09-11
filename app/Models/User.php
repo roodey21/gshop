@@ -43,4 +43,18 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function carts()
+    {
+        return $this->hasMany(Cart::class);
+    }
+
+    public function getTotalCartAttribute()
+    {
+        $total = 0;
+        foreach ($this->carts as $cart) {
+            $total += ($cart->product->price * $cart->qty);
+        }
+        return number_format($total, 0, ',', ',');
+    }
 }

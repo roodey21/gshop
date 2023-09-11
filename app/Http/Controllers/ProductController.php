@@ -30,8 +30,10 @@ class ProductController extends Controller
         if(!isset($data['status'])) {
             $product->update(['status' => 0]);
         }
-        foreach($request->images as $image) {
-            $product->addMedia($image)->toMediaCollection('product-images');
+        if($request->has('images')){
+            foreach($request->images as $image) {
+                $product->addMedia($image)->toMediaCollection('product-images');
+            }
         }
         return redirect()->route('admin.product.index')->with('success', 'Produk berhasil ditambahkan');
     }
@@ -49,8 +51,10 @@ class ProductController extends Controller
         if(!isset($data['status'])) {
             $product->update(['status' => 0]);
         }
-        foreach($request->images as $image) {
-            $product->addMedia($image)->toMediaCollection('product-images');
+        if ($request->has('images')) {
+            foreach($request->images as $image) {
+                $product->addMedia($image)->toMediaCollection('product-images');
+            }
         }
         return redirect()->route('admin.product.index')->with('success', 'Produk berhasil diupdate');
     }

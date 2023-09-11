@@ -9,6 +9,7 @@ use Spatie\Sluggable\SlugOptions;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class Product extends Model implements HasMedia
 {
@@ -32,6 +33,15 @@ class Product extends Model implements HasMedia
             ->saveSlugsTo('slug');
     }
 
+    public function registerMediaConversions(Media $media = null): void
+    {
+        $this->addMediaConversion('thumb')
+            ->width(305)
+            ->height(285)
+            ->sharpen(10)
+            ->nonOptimized();
+    }
+
     public function category()
     {
         return $this->belongsTo(Category::class);
@@ -39,6 +49,11 @@ class Product extends Model implements HasMedia
 
     public function getThumbnailAttribute()
     {
-        return $this->getFirstMediaUrl('product-images') ?: null;
+        return $this->getFirstMediaUrl('product-images') ?: asset('shop/images/resource/products/1.png');
+    }
+
+    public function getFormattedPriceAttribute()
+    {
+        return 'Rp. '.number_format($this->price, 0, ',', ',');
     }
 }
