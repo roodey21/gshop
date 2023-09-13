@@ -28,6 +28,7 @@ class StoreProductRequest extends FormRequest
             'price' => 'required|integer',
             'weight' => 'required|integer',
             'status' => 'nullable|boolean',
+            'stock' => 'integer|min:0',
             'category_id' => 'required|exists:categories,id',
             'images.*' => 'nullable|image|mimes:jpg,jpeg,png,svg|max:1024',
         ];
@@ -47,6 +48,8 @@ class StoreProductRequest extends FormRequest
             'weight.required' => 'Berat harus diisi',
             'weight.integer' => 'Berat harus berupa angka',
             'status.boolean' => 'Status harus berupa boolean',
+            'stock.integer' => 'Stok harus berupa angka',
+            'stock.min' => 'Stok minimal 0',
             'category_id.required' => 'Kategori harus diisi',
             'category_id.exists' => 'Kategori tidak ditemukan',
         ];

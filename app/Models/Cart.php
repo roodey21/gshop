@@ -25,6 +25,11 @@ class Cart extends Model
         return $this->belongsTo(USer::class);
     }
 
+    public function transaction()
+    {
+        return $this->belongsTo(Transaction::class);
+    }
+
     public function getFormattedTotalAttribute()
     {
         return 'Rp. '.number_format($this->product->price * $this->qty, 0, ',', ',');

@@ -87,7 +87,7 @@
 							<div class="cart-total-box">
 								<ul class="cart-totals">
 									<li>Subtotals : <span>Rp. {{ auth()->user()->total_cart }}</span></li>
-									<li>Totals : <span>£381.00</span></li>
+									<li>Totals : <span>Rp. {{ auth()->user()->total_cart }}</span></li>
 								</ul>
 								<div class="check-box">
 									<input type="checkbox" name="remember-password" id="type-1">
@@ -95,7 +95,7 @@
 								</div>
 								<!-- Buttons Box -->
 								<div class="buttons-box">
-									<a href="contact.html" class="theme-btn proceed-btn">
+									<a href="{{ route('shop.cart.checkout') }}" class="theme-btn proceed-btn">
 										Procced To Cheackout
 									</a>
 								</div>

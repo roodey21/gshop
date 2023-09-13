@@ -6,6 +6,7 @@ namespace Database\Seeders;
 
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\Province;
 use Spatie\Permission\Models\Role;
 use App\Models\User;
 use Illuminate\Database\Seeder;
@@ -40,6 +41,8 @@ class DatabaseSeeder extends Seeder
         $this->call([
             SiteSettingSeeder::class,
             RoleUserSeeder::class,
+            CourierSeeder::class,
+            ProvinceSeeder::class,
         ]);
     }
 }

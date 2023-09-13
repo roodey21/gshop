@@ -14,9 +14,15 @@ class ProvinceSeeder extends Seeder
      */
     public function run(): void
     {
-        $response = Http::get('https://pro.rajaongkir.com/api/province', [
-            'key' => env('RAJAONGKIR_API_KEY')
-        ]);
+        if(env('local')) {
+            $response = Http::withoutVerifying()->get('https://pro.rajaongkir.com/api/province', [
+                'key' => env('RAJAONGKIR_API_KEY'),
+            ]);
+        } else {
+            $response = Http::get('https://pro.rajaongkir.com/api/province', [
+                'key' => env('RAJAONGKIR_API_KEY'),
+            ]);
+        }
 
         $data = $response->json();
 

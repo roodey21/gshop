@@ -28,15 +28,27 @@
                     <h3 class="card-title">Form Produk</h3>
                 </div>
                 <div class="card-body">
-                    <div class="mb-3">
-                        <label class="form-label required">Nama Produk</label>
-                        <div>
-                            <input type="text" name="name" value="{{ old('name') }}"
-                                class="form-control @error('name') is-invalid @enderror" aria-describedby="nameHelp"
-                                placeholder="Contoh: Fashion, Alat Dapur" required>
-                            @error('name')
-                            <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
+                    <div class="row">
+                        <div class="mb-3 col-md-6">
+                            <label class="form-label required">Nama Produk</label>
+                            <div>
+                                <input type="text" name="name" value="{{ old('name') }}"
+                                    class="form-control @error('name') is-invalid @enderror" aria-describedby="nameHelp"
+                                    placeholder="Contoh: Fashion, Alat Dapur" required>
+                                @error('name')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="mb-3 col-md-6">
+                            <label class="form-label">Kode SKU</label>
+                            <div>
+                                <input class="form-control @error('sku') is-invalid @enderror" name="sku" id="sku"
+                                    placeholder="Kode Barang (Optional)" value="{{ old('sku') }}">
+                                @error('sku')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
                         </div>
                     </div>
                     <div class="row">
@@ -70,11 +82,11 @@
                     </div>
                     <div class="row">
                         <div class="mb-3 col-md-6">
-                            <label class="form-label">Kode SKU</label>
+                            <label class="form-label">Stok</label>
                             <div>
-                                <input class="form-control @error('sku') is-invalid @enderror" name="sku" id="sku"
-                                    placeholder="Kode Barang (Optional)" value="{{ old('sku') }}">
-                                @error('sku')
+                                <input class="form-control @error('stock') is-invalid @enderror" name="stock" id="stock"
+                                    placeholder="Jumlah Stock Barang" value="{{ old('stock') }}">
+                                @error('stock')
                                 <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>

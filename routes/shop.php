@@ -1,8 +1,10 @@
 <?php
 
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ProvinceController;
 use App\Http\Controllers\Shop\ProductController as ShopProductController;
 use App\Http\Controllers\Shop\CartController as ShopCartController;
+use App\Http\Controllers\Shop\TransactionController;
 use Illuminate\Support\Facades\Route;
 
 /**
@@ -24,5 +26,10 @@ Route::middleware(['auth','role:user'])->group(function () {
     Route::get('getCity', [ShopCartController::class, 'getCity'])->name('ongkir.getCity');
     Route::get('getSubdistrict', [ShopCartController::class, 'getSubdistrict'])->name('ongkir.getSubdistrict');
     Route::get('cekOngkir', [ShopCartController::class, 'cekOngkir'])->name('ongkir.cekOngkir');
-    Route::get('checkout', [ShopCartController::class, 'checkout'])->name('shop.cart.checkout');
+
+    Route::get('checkout', [TransactionController::class, 'index'])->name('shop.cart.checkout');
+    Route::post('checkout', [TransactionController::class, 'store'])->name('cart.checkout.store');
+    Route::get('payment', [TransactionController::class, 'payment'])->name('cart.payment');
 });
+
+Route::get('seed-province', [ProvinceController::class, 'seedProvince']);

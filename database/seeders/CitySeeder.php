@@ -14,9 +14,15 @@ class CitySeeder extends Seeder
      */
     public function run(): void
     {
-        $response = Http::get('https://pro.rajaongkir.com/api/city', [
-            'key' => env('RAJAONGKIR_API_KEY')
-        ]);
+        if (env('APP_ENV') == 'local') {
+            $response = Http::withoutVerifying()->get('https://pro.rajaongkir.com/api/city', [
+                'key' => env('RAJAONGKIR_API_KEY')
+            ]);
+        } else {
+            $response = Http::get('https://pro.rajaongkir.com/api/city', [
+                'key' => env('RAJAONGKIR_API_KEY')
+            ]);
+        }
 
         $data = $response->json();
 

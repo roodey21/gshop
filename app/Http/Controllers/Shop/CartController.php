@@ -71,10 +71,17 @@ class CartController extends Controller
     {
         $city_id = request()->city_id;
         // get data from api rajaongkir
-        $response = Http::get('https://pro.rajaongkir.com/api/subdistrict', [
-            'key' => env('RAJAONGKIR_API_KEY'),
-            'city' => $city_id,
-        ]);
+        if (env('APP_ENV') == 'local')  {
+            $response = Http::withoutVerifying()->get('https://pro.rajaongkir.com/api/subdistrict', [
+                'key' => env('RAJAONGKIR_API_KEY'),
+                'city' => $city_id,
+            ]);
+        } else {
+            $response = Http::get('https://pro.rajaongkir.com/api/subdistrict', [
+                'key' => env('RAJAONGKIR_API_KEY'),
+                'city' => $city_id,
+            ]);
+        }
         $data = $response->json();
         return response()->json([
             'success' => true,
@@ -91,16 +98,29 @@ class CartController extends Controller
         $weight = 1000;
         $courier = Courier::where('status', 1)->pluck('code')->implode(':');
         // get data from api rajaongkir
-        $response = Http::post('https://pro.rajaongkir.com/api/cost', [
-            'key' => env('RAJAONGKIR_API_KEY'),
-            'origin' => $origin,
-            'destination' => $destination,
-            'destinationType' => $destinationType,
-            'weight' => $weight,
-            'courier' => $courier,
-            'originType' => $originType,
-        ]);
+        if (env('APP_ENV') == 'local') {
+            $response = Http::withoutVerifying()->post('https://pro.rajaongkir.com/api/cost', [
+                'key' => env('RAJAONGKIR_API_KEY'),
+                'origin' => $origin,
+                'destination' => $destination,
+                'destinationType' => $destinationType,
+                'weight' => $weight,
+                'courier' => $courier,
+                'originType' => $originType,
+            ]);
+        } else {
+            $response = Http::post('https://pro.rajaongkir.com/api/cost', [
+                'key' => env('RAJAONGKIR_API_KEY'),
+                'origin' => $origin,
+                'destination' => $destination,
+                'destinationType' => $destinationType,
+                'weight' => $weight,
+                'courier' => $courier,
+                'originType' => $originType,
+            ]);
+        }
         $data = $response->json();
+        // dd($data);
         $results = $data['rajaongkir']['results'];
         return redirect()->back()->with('data-ongkir', $results);
     }
