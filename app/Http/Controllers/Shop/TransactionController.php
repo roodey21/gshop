@@ -18,6 +18,9 @@ class TransactionController extends Controller
     //
     public function index()
     {
+        if (auth()->user() && auth()->user()->carts->count() === 0) {
+            return redirect()->route('shop.cart.index')->with('error', 'Keranjang belanja Anda kosong.');
+        }
         $carts = auth()->user()->carts;
         $provinces = Province::all();
         $cities = City::all();
@@ -28,6 +31,9 @@ class TransactionController extends Controller
     public function store(StoreCheckOutRequest $request)
     {
         // dd($request->all());
+        if (auth()->user() && auth()->user()->carts->count() === 0) {
+            return redirect()->route('shop.cart.index')->with('error', 'Keranjang belanja Anda kosong.');
+        }
         $carts = auth()->user()->carts;
         $carts->each(function ($cart) {
             $cart->product->decrement('stock', $cart->qty);
@@ -39,7 +45,7 @@ class TransactionController extends Controller
         $data = $request->validated();
         $data['user_id'] = auth()->id();
         $data['status'] = 0;
-        $data['code'] = 'INV/' . date('mdY'). rand(100, 999);
+        $data['code'] = 'INV/' . date('mdY') . rand(100, 999);
         // dd($data);
         $data['delivery_cost'] = $this->cekOngkir($weight, $data['subdistrict'], $data['courier_id']);
 

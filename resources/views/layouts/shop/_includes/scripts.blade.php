@@ -1,4 +1,3 @@
-
 <script src="{{ asset('shop/js/jquery.js') }}"></script>
 <script src="{{ asset('shop/js/popper.min.js') }}"></script>
 <script src="{{ asset('shop/js/bootstrap.min.js') }}"></script>
@@ -33,9 +32,16 @@
         }
     })
     @if (session()->has('success'))
-    Toast.fire({
-        icon: 'success',
-        title: '{{ session('success') }}'
-    })
+        Toast.fire({
+            icon: 'success',
+            title: '{{ session('success') }}'
+        })
+    @endif
+
+    @if (session()->has('error'))
+        Toast.fire({
+            icon: 'error',
+            title: '{{ session('error') }}'
+        })
     @endif
 </script>
