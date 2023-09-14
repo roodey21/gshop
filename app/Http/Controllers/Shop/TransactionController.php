@@ -56,10 +56,10 @@ class TransactionController extends Controller
                 'price' => $cart->product->price,
             ];
             $transaction->transactionDetails()->create($transactionDetail);
-            $cart->delete();
+            // $cart->delete();
         });
 
-        return redirect()->route('shop.payment')->with('success', 'Pesanan berhasil dibuat');
+        return redirect()->route('shop.payment', ['id' => $transaction->id])->with('success', 'Pesanan berhasil dibuat');
     }
 
     public function cekOngkir($weight = 1000, $destination, $courier_id)
@@ -135,6 +135,5 @@ class TransactionController extends Controller
             'success' => true,
             'data' => $results,
         ]);
-
     }
 }

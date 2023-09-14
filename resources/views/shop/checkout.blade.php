@@ -197,35 +197,30 @@
             // $('select[name=city]').selectmenu();
 
             $('select[name=province_id]').on('selectmenuchange', function() {
-            const id = $(this).val();
-            $.ajax({
-                url: '{{ route('ongkir.getCity') }}',
-                method: 'GET',
-                data: {
-                    province_id: id
-                },
-                success: function(res) {
-                    // Clear the city selectmenu
-                    $('select[name=city_id]').empty();
+                const id = $(this).val();
+                $.ajax({
+                    url: '{{ route('ongkir.getCity') }}',
+                    method: 'GET',
+                    data: {
+                        province_id: id
+                    },
+                    success: function(res) {
+                        // Clear the city selectmenu
+                        $('select[name=city_id]').empty();
 
-                    // Add a default option
-                    $('select[name=city_id]').append('<option value="">Pilih Kota/Kabupaten</option>');
+                        // Add a default option
+                        $('select[name=city_id]').append('<option value="">Pilih Kota/Kabupaten</option>');
 
-                    // Add options for each city
-                    res.data.forEach(city => {
-                        $('select[name=city_id]').append(
-                            `<option value="${city.id}">${city.name}</option>`);
-                    });
+                        // Add options for each city
+                        res.data.forEach(city => {
+                            $('select[name=city_id]').append(
+                                `<option value="${city.id}">${city.name}</option>`);
+                        });
 
-                    // Refresh the city selectmenu
-                    $('select[name=city_id]').selectmenu('refresh');
-                }
-            });
-
-            // Refresh the city selectmenu
-            $('select[name=city_id]').selectmenu('refresh');
-            }
-            });
+                        // Refresh the city selectmenu
+                        $('select[name=city_id]').selectmenu('refresh');
+                    }
+                });
             });
 
             $('select[name=city_id]').on('selectmenuchange', function() {
@@ -249,7 +244,7 @@
                         subdistrict.forEach(sub => {
                             $('select[name=subdistrict]').append(
                                 `<option value="${sub.subdistrict_id}">${sub.subdistrict_name}</option>`
-                                );
+                            );
                         });
 
                         // Refresh the subdistrict selectmenu

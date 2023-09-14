@@ -31,7 +31,7 @@ Route::middleware(['auth', 'role:user'])->group(function () {
     Route::get('checkout/delivery-cost', [TransactionController::class, 'deliveryCost'])->name('shop.cart.cekOngkir');
     Route::get('checkout', [TransactionController::class, 'index'])->name('shop.cart.checkout');
     Route::post('checkout', [TransactionController::class, 'store'])->name('cart.checkout.store');
-    Route::get('payment', [PaymentController::class, 'index'])->name('shop.payment');
+    Route::get('payment/{id}', [PaymentController::class, 'index'])->name('shop.payment');
 });
 
 Route::get('seed-province', [ProvinceController::class, 'seedProvince']);

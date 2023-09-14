@@ -10,4 +10,9 @@ class Courier extends Model
     use HasFactory;
 
     protected $fillable = ['status'];
+
+    public function transaction()
+    {
+        return $this->belongsTo(Transaction::class);
+    }
 }

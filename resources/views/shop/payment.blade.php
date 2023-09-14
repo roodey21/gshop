@@ -14,12 +14,44 @@
 
                 <!-- Form Column -->
                 <div class="form-column col-lg-8 col-md-12 col-sm-12">
-                    <div class="inner-column">
-                        <h4>Delivery Information</h4>
-                        <!-- Shipping Form -->
-                        <!-- End Shipping Form -->
-
+                    <div class="form-column col-lg-12 col-md-12 col-sm-12">
+                        <div class="inner-column">
+                            <h4>Detail Pesanan</h4>
+                            <table class="table table-bordered table-responsive">
+                                <thead>
+                                    <tr>
+                                        <th>Nama Penerima</th>
+                                        <th>Nama Produk</th>
+                                        <th>Jumlah</th>
+                                        <th>Berat (gram)</th>
+                                        <th>Alamat</th>
+                                        <th>Harga Produk</th>
+                                        <th>Ongkos kirim</th>
+                                        <th>Kurir</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($carts as $cart)
+                                        <tr>
+                                            <td>{{ $transaction->name }}</td>
+                                            <td>{{ $cart->product->name }}</td>
+                                            <td>{{ $cart->qty }}</td>
+                                            <td>{{ $cart->product->weight }}</td>
+                                            <td>{{ $transaction->address }}</td>
+                                            <!-- Gantilah dengan alamat pengiriman yang sesuai -->
+                                            <td>Rp. {{ number_format($cart->product->price * $cart->qty, 0, ',', '.') }}
+                                            </td>
+                                            <td>{{ $transaction->delivery_cost }}</td>
+                                            <td>
+                                                {{ $transaction->courier->name }}
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
+
                 </div>
 
                 <!-- Order Column -->
