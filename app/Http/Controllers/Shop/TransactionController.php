@@ -9,14 +9,12 @@ use App\Models\City;
 use App\Models\Courier;
 use App\Models\Province;
 use App\Models\Transaction;
-use Illuminate\Contracts\Cache\Store;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 
 class TransactionController extends Controller
 {
     //
-    public function index()
+    public function index(Transaction $transaction)
     {
         if (auth()->user() && auth()->user()->carts->count() === 0) {
             return redirect()->route('shop.cart.index')->with('error', 'Keranjang belanja Anda kosong.');
@@ -25,7 +23,7 @@ class TransactionController extends Controller
         $provinces = Province::all();
         $cities = City::all();
         $couriers = Courier::all();
-        return view('shop.checkout', compact('carts', 'provinces', 'cities', 'couriers'));
+        return view('shop.checkout', compact('carts', 'provinces', 'cities', 'couriers', 'transaction'));
     }
 
     public function store(StoreCheckOutRequest $request)
@@ -61,12 +59,7 @@ class TransactionController extends Controller
             $cart->delete();
         });
 
-        return redirect()->route('cart.payment')->with('success', 'Pesanan berhasil dibuat');
-    }
-
-    public function payment()
-    {
-        return view('shop.payment');
+        return redirect()->route('shop.payment')->with('success', 'Pesanan berhasil dibuat');
     }
 
     public function cekOngkir($weight = 1000, $destination, $courier_id)
