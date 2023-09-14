@@ -144,7 +144,7 @@
 						<div class="order-box">
 							<ul class="order-totals">
 								<li>Subtotal<span>Rp. {{ auth()->user()->total_cart }}</span></li>
-								<li>Shipping Fee<span>$34.00</span></li>
+								<li>Shipping Fee<span class="delivery-cost">Isi alamat dan pilih kurir</span></li>
 							</ul>
 
 							<!-- Voucher Box -->
@@ -233,6 +233,23 @@
 
 				// Refresh the subdistrict selectmenu
 				$('select[name=subdistrict]').selectmenu('refresh');
+			}
+		});
+	});
+    $('select[name=courier_id]').on('selectmenuchange', function () {
+		const courier_id = $(this).val();
+        console.log(courier_id)
+		$.ajax({
+			url: '{{ route('shop.cart.cekOngkir') }}',
+			method: 'GET',
+			data: {
+				destination: $('select[name=subdistrict]').val(),
+                courier_id: courier_id
+			},
+			success: function(res) {
+				const deliveryCost = res.data;
+
+                $('.delivery-cost').html('Rp. ' + deliveryCost);
 			}
 		});
 	});

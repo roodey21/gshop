@@ -27,6 +27,7 @@ Route::middleware(['auth','role:user'])->group(function () {
     Route::get('getSubdistrict', [ShopCartController::class, 'getSubdistrict'])->name('ongkir.getSubdistrict');
     Route::get('cekOngkir', [ShopCartController::class, 'cekOngkir'])->name('ongkir.cekOngkir');
 
+    Route::get('checkout/delivery-cost', [TransactionController::class, 'deliveryCost'])->name('shop.cart.cekOngkir');
     Route::get('checkout', [TransactionController::class, 'index'])->name('shop.cart.checkout');
     Route::post('checkout', [TransactionController::class, 'store'])->name('cart.checkout.store');
     Route::get('payment', [TransactionController::class, 'payment'])->name('cart.payment');
