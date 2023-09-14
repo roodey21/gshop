@@ -103,4 +103,45 @@ class TransactionController extends Controller
         $results = $data['rajaongkir']['results'][0]['costs'][0]['cost'][0]['value'];
         return $results;
     }
+
+    public function deliveryCost()
+    {
+        $carts = auth()->user()->carts;
+        $weight = $carts->sum(function ($cart) {
+            return $cart->qty * $cart->product->weight;
+        });
+        $courier = Courier::where('id', request('courier_id'))->first()->code;
+        $origin = 210;
+        $originType = 'city';
+        $destinationType = 'subdistrict';
+        if (env('APP_ENV') == 'local') {
+            $response = Http::withoutVerifying()->post('https://pro.rajaongkir.com/api/cost', [
+                'key' => env('RAJAONGKIR_API_KEY'),
+                'origin' => $origin,
+                'destination' => request('destination'),
+                'destinationType' => $destinationType,
+                'weight' => $weight,
+                'courier' => $courier,
+                'originType' => $originType,
+            ]);
+        } else {
+            $response = Http::post('https://pro.rajaongkir.com/api/cost', [
+                'key' => env('RAJAONGKIR_API_KEY'),
+                'origin' => $origin,
+                'destination' => request('destination'),
+                'destinationType' => $destinationType,
+                'weight' => $weight,
+                'courier' => $courier,
+                'originType' => $originType,
+            ]);
+        }
+        $data = $response->json();
+        // dd($data['rajaongkir']['results'][0]['costs'][0]['cost'][0]['value']);
+        $results = $data['rajaongkir']['results'][0]['costs'][0]['cost'][0]['value'];
+        return response()->json([
+            'success' => true,
+            'data' => $results,
+        ]);
+
+    }
 }
