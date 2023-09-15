@@ -17,7 +17,7 @@ class TransactionController extends Controller
     public function index(Transaction $transaction)
     {
         if (auth()->user() && auth()->user()->carts->count() === 0) {
-            return redirect()->route('shop.cart.index')->with('error', 'Keranjang belanja Anda kosong.');
+            return redirect()->back()->with('error', 'Keranjang belanja Anda kosong.');
         }
         $carts = auth()->user()->carts;
         $provinces = Province::all();
@@ -56,7 +56,7 @@ class TransactionController extends Controller
                 'price' => $cart->product->price,
             ];
             $transaction->transactionDetails()->create($transactionDetail);
-            // $cart->delete();
+            $cart->delete();
         });
 
         return redirect()->route('shop.payment', ['id' => $transaction->id])->with('success', 'Pesanan berhasil dibuat');
