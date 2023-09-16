@@ -29,9 +29,6 @@ class TransactionController extends Controller
     public function store(StoreCheckOutRequest $request)
     {
         // dd($request->all());
-        if (auth()->user() && auth()->user()->carts->count() === 0) {
-            return redirect()->route('shop.cart.index')->with('error', 'Keranjang belanja Anda kosong.');
-        }
         $carts = auth()->user()->carts;
         $carts->each(function ($cart) {
             $cart->product->decrement('stock', $cart->qty);

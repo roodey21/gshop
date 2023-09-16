@@ -121,7 +121,7 @@
                                         </select>
                                     </div>
 
-                                    <div class="col-lg-12 col-md-12 col-sm-12 form-group mb-5">
+                                    <div class="mb-5 col-lg-12 col-md-12 col-sm-12 form-group">
                                         <textarea class="" name="description" id="description" placeholder="Note Produk (Optional)"></textarea>
                                         @error('description')
                                             <div class="invalid-feedback">{{ $message }}</div>
