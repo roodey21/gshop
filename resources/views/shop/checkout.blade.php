@@ -28,7 +28,7 @@
                 <!-- Form Column -->
                 <div class="form-column col-lg-8 col-md-12 col-sm-12">
                     <div class="inner-column">
-                        <h4>Infomrasi Pengiriman</h4>
+                        <h4>Informasi Pengiriman</h4>
                         {{-- {{ $errors }} --}}
                         <!-- Shipping Form -->
                         <div class="shipping-form">
@@ -56,10 +56,9 @@
                                     <div class="col-lg-4 col-md-4 col-sm-12 form-group">
                                         <select class="custom-select-box @error('province_id') is-invalid @enderror"
                                             name="province_id" id="province_id" required>
-                                            <option selected>Provinsi</option>
+                                            <option selected>Pilih Provinsi</option>
                                             @forelse ($provinces as $province)
-                                                <option value="{{ $province->id }}"
-                                                    {{ old('province_id', $province->id) == $province->id ? 'selected' : '' }}>
+                                                <option value="{{ $province->id }}">
                                                     {{ $province->name }}</option>
                                             @empty
                                                 <option value="">Tidak ada data</option>
@@ -74,13 +73,7 @@
                                         <select name="city_id"
                                             class="custom-select-box @error('city_id') is-invalid @enderror"
                                             id="city_id" required>
-                                            <option>Kota</option>
-                                            {{-- @forelse ($cities as $city)
-                                            <option value="{{ $city->id }}" {{ old('city_id', $city->id) ==
-                                                $city->id ? 'selected':'' }}>{{ $city->name }}</option>
-                                            @empty
-                                            <option value="">Belum ada data</option>
-                                            @endforelse --}}
+                                            <option selected>Pilih Kota/Kabupaten</option>
                                             @error('city_id')
                                                 <div class="invalid-feedback">{{ $message }}</div>
                                             @enderror
@@ -91,7 +84,7 @@
                                         <select name="subdistrict"
                                             class="custom-select-box @error('subdistric') is-invalid @enderror"
                                             id="subditric" required>
-                                            <option>Kecamatan</option>
+                                            <option selected>Pilih Kecamatan</option>
                                         </select>
                                     </div>
 
@@ -100,16 +93,15 @@
                                             value="{{ old('address') }}" placeholder="Alamat Lengkap" required>
                                     </div>
 
-                                    <div class="col-lg-12 col-md-12 col-sm-12 form-group">
+                                    <div class="col-lg-12 col-md-12 col-sm-12 form-group" id="courier-select" style="display: none">
                                         <select name="courier_id"
                                             class="custom-select-box @error('courier_id') is-invalid @enderror"
                                             id="courier_id">
-                                            <option value="">Pilih Kurir</option>
+                                            <option value="" selected>Pilih Kurir</option>
                                             <option value="ambil">Ambil ditoko</option>
                                             @forelse ($couriers as $courier)
                                                 @if ($courier->status == 1)
-                                                    <option value="{{ $courier->id }}"
-                                                        {{ old('courier_id', $courier->id) == $courier->id ? 'selected' : '' }}>
+                                                    <option value="{{ $courier->id }}">
                                                         {{ $courier->name }}</option>
                                                 @endif
                                             @empty
@@ -128,21 +120,6 @@
                                         @enderror
                                     </div>
 
-                                    {{-- <div class="col-lg-12 col-md-12 col-sm-12 form-group">
-										<div class="check-box">
-											<input type="checkbox" name="remember-password" id="type-1">
-											<label for="type-1">Save my name, email, and website in this browser for the next time.</label>
-										</div>
-									</div>
-
-									<div class="col-lg-12 col-md-12 col-sm-12 form-group">
-										<div class="buttons-box">
-											<button class="theme-btn btn-style-one">
-												Procced To Cheakout
-											</button>
-										</div>
-									</div> --}}
-
                                 </div>
                         </div>
                         <!-- End Shipping Form -->
@@ -153,26 +130,16 @@
                 <!-- Order Column -->
                 <div class="order-column col-lg-4 col-md-12 col-sm-12">
                     <div class="inner-column">
-                        <h4>Order Summery</h4>
+                        <h4>Order Summary</h4>
                         <!-- Order Box -->
                         <div class="order-box">
                             <ul class="order-totals">
                                 <li>Subtotal<span>Rp. {{ auth()->user()->total_cart }}</span></li>
-                                <li>Shipping Fee<span class="delivery-cost">Isi alamat dan pilih kurir</span></li>
+                                <li>Shipping Fee<span class="delivery-cost">-</span></li>
                             </ul>
 
-                            <!-- Voucher Box -->
-                            {{-- <div class="voucher-box">
-								<form method="post" action="contact.html">
-									<div class="form-group">
-										<input type="email" name="search-field" value="" placeholder="Enter voucher Code" required>
-										<button type="submit" class="theme-btn apply-btn">Apply code</button>
-									</div>
-								</form>
-							</div> --}}
-
                             <!-- Order Total -->
-                            <div class="order-total">Total <span>$345.00</span></div>
+                            <div class="order-total">Total <span  class="grand-total"></span></div>
 
                             <div class="button-box">
                                 <button type="submit" class="theme-btn pay-btn">Lanjut Pembayaran</button>
@@ -195,9 +162,19 @@
         <script>
             // $('select[name=province]').selectmenu();
             // $('select[name=city]').selectmenu();
+            let province_id = null;
+            let city_id = null;
+            let subdistrict_id = null;
+            let weight = "{{ auth()->user()->carts->sum(function ($cart) { return $cart->qty * $cart->product->weight; }) }}";
+            let total_cart = "{{ auth()->user()->total_cart }}";
+            let subtotal = parseInt(total_cart.replace(",", ""));
+            let delivery_cost = 0;
+            let grand_total = subtotal + delivery_cost;
+            $('.grand-total').html('Rp. ' + grand_total);
 
             $('select[name=province_id]').on('selectmenuchange', function() {
                 const id = $(this).val();
+                province_id = id;
                 $.ajax({
                     url: '{{ route('ongkir.getCity') }}',
                     method: 'GET',
@@ -225,6 +202,7 @@
 
             $('select[name=city_id]').on('selectmenuchange', function() {
                 const id = $(this).val();
+                city_id = id;
                 $.ajax({
                     url: '{{ route('ongkir.getSubdistrict') }}',
                     method: 'GET',
@@ -252,6 +230,17 @@
                     }
                 });
             });
+
+            $('select[name=subdistrict]').on('selectmenuchange', function() {
+                const id = $(this).val();
+                subdistrict_id = id;
+                if (subdistrict_id != undefined) {
+                    $('#courier-select').css('display', 'block');
+                } else {
+                    $('#courier-select').css('display', 'none');
+                }
+            });
+
             $('select[name=courier_id]').on('selectmenuchange', function() {
                 const courier_id = $(this).val();
                 console.log(courier_id)
@@ -263,9 +252,10 @@
                         courier_id: courier_id
                     },
                     success: function(res) {
-                        const deliveryCost = res.data;
+                        console.log(res)
+                        delivery_cost = res.data;
 
-                        $('.delivery-cost').html('Rp. ' + deliveryCost);
+                        $('.delivery-cost').html('Rp. ' + delivery_cost);
                     }
                 });
             });
