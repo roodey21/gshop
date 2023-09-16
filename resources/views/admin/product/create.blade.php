@@ -142,7 +142,7 @@
         <div class="col-md-4">
             <div class="card">
                 <div class="card-header d-flex justify-content-between">
-                    <h3 class="card-title">Form Produk</h3>
+                    <h3 class="card-title">Foto Produk</h3>
                     <button type="button" class="btn btn-primary btn-icon" id="add-image">
                         <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24"
                             stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
@@ -156,7 +156,11 @@
                 <div class="card-body" id="input-images">
                     <div class="alert alert-info" role="alert">
                         <h4 class="alert-title">Petunjuk!</h4>
-                        <div class="text-secondary">Gunakan tombol + diatas untuk menambah gambar. <br>(max 5 gambar /produk, max 1 mb /gambar)</div>
+                        <div class="text-secondary">Gunakan tombol + diatas untuk menambah gambar. <br>(max 4 gambar /produk, max 1 mb /gambar)</div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="" class="form-label">Gambar Utama (Untuk thumbnail)</label>
+                        <input type="file" name="images[0]" class="form-control">
                     </div>
                 </div>
             </div>
@@ -189,7 +193,7 @@
         });
 
         let imageCount = 0;
-        const maxImage = 5;
+        const maxImage = 3;
         document.querySelector('#add-image').addEventListener('click', function() {
             if (imageCount >= maxImage) {
                 return;
@@ -198,8 +202,8 @@
             let input = document.createElement('div');
             input.classList.add('mb-3');
             input.innerHTML = `
-                <label for="" class="form-label">Gambar ${imageCount}</label>
-                <input type="file" name="images[]" class="form-control">
+                <label for="" class="form-label">Gambar Lain ${imageCount}</label>
+                <input type="file" name="images[${imageCount}]" class="form-control">
             `;
             document.querySelector('#input-images').appendChild(input);
         });

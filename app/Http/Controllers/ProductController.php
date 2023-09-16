@@ -31,8 +31,8 @@ class ProductController extends Controller
             $product->update(['status' => 0]);
         }
         if($request->has('images')){
-            foreach($request->images as $image) {
-                $product->addMedia($image)->toMediaCollection('product-images');
+            foreach($request->images as $index => $image) {
+                $product->addMedia($image)->usingName($product->name.'-'.$index)->toMediaCollection('product-images');
             }
         }
         return redirect()->route('admin.product.index')->with('success', 'Produk berhasil ditambahkan');
