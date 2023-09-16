@@ -57,4 +57,19 @@ class Product extends Model implements HasMedia
     {
         return 'Rp. '.number_format($this->price, 0, ',', ',');
     }
+
+    public function transactions()
+    {
+        return $this->hasMany(Transaction::class);
+    }
+
+    public function carts()
+    {
+        return $this->hasMany(Cart::class);
+    }
+
+    public function transactionsDetails()
+    {
+        return $this->hasMany(TransactionDetail::class);
+    }
 }

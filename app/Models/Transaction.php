@@ -45,4 +45,24 @@ class Transaction extends Model
     {
         return $this->hasMany(Cart::class);
     }
+
+    public function getSubTotalAttribute()
+    {
+        $total = 0;
+        foreach ($this->transactionDetails as $detail) {
+            $total += ($detail->price * $detail->qty);
+        }
+        return number_format($total, 0, ',', ',');
+    }
+
+    public function getTotalPriceAttribute()
+    {
+        $total = 0;
+        foreach ($this->transactionDetails as $detail) {
+            $total += ($detail->price * $detail->qty );
+        }
+
+        $totalPrice = $total + $this->delivery_cost;
+        return number_format($totalPrice, 0, ',', ',');
+    }
 }
