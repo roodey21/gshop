@@ -37,7 +37,7 @@
                                 <li><a href="{{ route('shop.index') }}">Home</a></li>
                                 <li><a href="{{ route('shop.product.index') }}">Produk</a></li>
                                 <li><a href="#">About</a></li>
-                                <li><a href="about.html">Contact Us</a></li>
+                                <li><a href="#">Contact Us</a></li>
                                 {{-- <li class="dropdown"><a href="#">Shop</a>
                                     <ul>
                                         <li><a href="shop.html">Our Products</a></li>

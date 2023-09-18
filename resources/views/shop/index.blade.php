@@ -187,8 +187,8 @@
 						<div class="inner-box">
 							<div class="content">
 								<div class="icon flaticon-fast"></div>
-								<strong>Free Shipping</strong>
-								<div class="text">Free shipping over $100</div>
+								<strong>Pengiriman Nasional</strong>
+								<div class="text">Pengiriman ke Semua kota di Indonesia</div>
 							</div>
 						</div>
 					</div>
@@ -198,8 +198,8 @@
 						<div class="inner-box">
 							<div class="content">
 								<div class="icon flaticon-padlock"></div>
-								<strong>Payment Secure</strong>
-								<div class="text">Got 100% Payment Safe</div>
+								<strong>Keamanan Transaksi</strong>
+								<div class="text">Jaminan 100% Transaksi Aman</div>
 							</div>
 						</div>
 					</div>
@@ -210,7 +210,7 @@
 							<div class="content">
 								<div class="icon flaticon-headphones-1"></div>
 								<strong>Support 24/7</strong>
-								<div class="text">Top quialty 24/7 Support</div>
+								<div class="text">Kami Siap Membantu Anda 24/7</div>
 							</div>
 						</div>
 					</div>
@@ -221,7 +221,7 @@
 							<div class="content">
 								<div class="icon flaticon-wallet"></div>
 								<strong>100% Money Back</strong>
-								<div class="text">Cutomers Money Backs</div>
+								<div class="text">Garansi Uang Kembali</div>
 							</div>
 						</div>
 					</div>
@@ -241,14 +241,16 @@
 			</div>
 			<div class="four-item-carousel owl-carousel owl-theme">
 
+                @foreach($products as $product)
 				<!-- Shop Item -->
 				<div class="shop-item">
-					<div class="inner-box">
+					<form class="inner-box" method="POST" action="{{ route('shop.cart.add', $product->slug) }}">
+                        @csrf
 						<div class="image">
-							<a href="shop-detail.html"><img src="images/resource/products/1.png" alt="" /></a>
+							<a href="shop-detail.html"><img src="{{ $product->thumbnail }}" alt="" /></a>
 							<span class="tag flaticon-heart"></span>
 							<div class="cart-box text-center">
-								<a class="cart" href="#">Add to Cart</a>
+								<a class="cart" onclick="$(this).closest('form').submit()">Add to Cart</a>
 							</div>
 						</div>
 						<div class="lower-content">
@@ -257,11 +259,12 @@
 								<span class="fa fa-star"></span>
 								<span class="fa fa-star"></span>
 								<span class="fa fa-star"></span>
-								<span class="light fa fa-star"></span>
+								<span class="fa fa-star"></span>
+								{{-- <span class="light fa fa-star"></span> --}}
 							</div>
-							<h6><a href="shop-detail.html">masks 95 percent 0.3-μm <br> particles</a></h6>
+							<h6><a href="{{ route('shop.product.show', $product->slug) }}">{{ $product->name }}</a></h6>
 							<div class="d-flex justify-content-between align-items-center">
-								<div class="price"><span>$239.52</span> $362.00</div>
+								<div class="price">{{ $product->formatted_price }}</div>
 								<!-- Quantity Box -->
 								<div class="quantity-box">
 									<div class="item-quantity">
@@ -270,233 +273,9 @@
 								</div>
 							</div>
 						</div>
-					</div>
+					</form>
 				</div>
-
-				<!-- Shop Item -->
-				<div class="shop-item">
-					<div class="inner-box">
-						<div class="image">
-							<a href="shop-detail.html"><img src="images/resource/products/2.png" alt="" /></a>
-							<span class="tag flaticon-heart"></span>
-							<div class="cart-box text-center">
-								<a class="cart" href="#">Add to Cart</a>
-							</div>
-						</div>
-						<div class="lower-content">
-							<div class="rating">
-								<span class="fa fa-star"></span>
-								<span class="fa fa-star"></span>
-								<span class="fa fa-star"></span>
-								<span class="fa fa-star"></span>
-								<span class="light fa fa-star"></span>
-							</div>
-							<h6><a href="shop-detail.html">masks 95 percent 0.3-μm <br> particles</a></h6>
-							<div class="d-flex justify-content-between align-items-center">
-								<div class="price"><span>$239.52</span> $362.00</div>
-								<!-- Quantity Box -->
-								<div class="quantity-box">
-									<div class="item-quantity">
-										<input class="qty-spinner" type="text" value="1" name="quantity">
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<!-- Shop Item -->
-				<div class="shop-item">
-					<div class="inner-box">
-						<div class="image">
-							<a href="shop-detail.html"><img src="images/resource/products/3.png" alt="" /></a>
-							<span class="tag flaticon-heart"></span>
-							<div class="cart-box text-center">
-								<a class="cart" href="#">Add to Cart</a>
-							</div>
-						</div>
-						<div class="lower-content">
-							<div class="rating">
-								<span class="fa fa-star"></span>
-								<span class="fa fa-star"></span>
-								<span class="fa fa-star"></span>
-								<span class="fa fa-star"></span>
-								<span class="light fa fa-star"></span>
-							</div>
-							<h6><a href="shop-detail.html">masks 95 percent 0.3-μm <br> particles</a></h6>
-							<div class="d-flex justify-content-between align-items-center">
-								<div class="price"><span>$239.52</span> $362.00</div>
-								<!-- Quantity Box -->
-								<div class="quantity-box">
-									<div class="item-quantity">
-										<input class="qty-spinner" type="text" value="1" name="quantity">
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<!-- Shop Item -->
-				<div class="shop-item">
-					<div class="inner-box">
-						<div class="image">
-							<a href="shop-detail.html"><img src="images/resource/products/4.png" alt="" /></a>
-							<span class="tag flaticon-heart"></span>
-							<div class="cart-box text-center">
-								<a class="cart" href="#">Add to Cart</a>
-							</div>
-						</div>
-						<div class="lower-content">
-							<div class="rating">
-								<span class="fa fa-star"></span>
-								<span class="fa fa-star"></span>
-								<span class="fa fa-star"></span>
-								<span class="fa fa-star"></span>
-								<span class="light fa fa-star"></span>
-							</div>
-							<h6><a href="shop-detail.html">masks 95 percent 0.3-μm <br> particles</a></h6>
-							<div class="d-flex justify-content-between align-items-center">
-								<div class="price"><span>$239.52</span> $362.00</div>
-								<!-- Quantity Box -->
-								<div class="quantity-box">
-									<div class="item-quantity">
-										<input class="qty-spinner" type="text" value="1" name="quantity">
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<!-- Shop Item -->
-				<div class="shop-item">
-					<div class="inner-box">
-						<div class="image">
-							<a href="shop-detail.html"><img src="images/resource/products/1.png" alt="" /></a>
-							<span class="tag flaticon-heart"></span>
-							<div class="cart-box text-center">
-								<a class="cart" href="#">Add to Cart</a>
-							</div>
-						</div>
-						<div class="lower-content">
-							<div class="rating">
-								<span class="fa fa-star"></span>
-								<span class="fa fa-star"></span>
-								<span class="fa fa-star"></span>
-								<span class="fa fa-star"></span>
-								<span class="light fa fa-star"></span>
-							</div>
-							<h6><a href="shop-detail.html">masks 95 percent 0.3-μm <br> particles</a></h6>
-							<div class="d-flex justify-content-between align-items-center">
-								<div class="price"><span>$239.52</span> $362.00</div>
-								<!-- Quantity Box -->
-								<div class="quantity-box">
-									<div class="item-quantity">
-										<input class="qty-spinner" type="text" value="1" name="quantity">
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<!-- Shop Item -->
-				<div class="shop-item">
-					<div class="inner-box">
-						<div class="image">
-							<a href="shop-detail.html"><img src="images/resource/products/2.png" alt="" /></a>
-							<span class="tag flaticon-heart"></span>
-							<div class="cart-box text-center">
-								<a class="cart" href="#">Add to Cart</a>
-							</div>
-						</div>
-						<div class="lower-content">
-							<div class="rating">
-								<span class="fa fa-star"></span>
-								<span class="fa fa-star"></span>
-								<span class="fa fa-star"></span>
-								<span class="fa fa-star"></span>
-								<span class="light fa fa-star"></span>
-							</div>
-							<h6><a href="shop-detail.html">masks 95 percent 0.3-μm <br> particles</a></h6>
-							<div class="d-flex justify-content-between align-items-center">
-								<div class="price"><span>$239.52</span> $362.00</div>
-								<!-- Quantity Box -->
-								<div class="quantity-box">
-									<div class="item-quantity">
-										<input class="qty-spinner" type="text" value="1" name="quantity">
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<!-- Shop Item -->
-				<div class="shop-item">
-					<div class="inner-box">
-						<div class="image">
-							<a href="shop-detail.html"><img src="images/resource/products/3.png" alt="" /></a>
-							<span class="tag flaticon-heart"></span>
-							<div class="cart-box text-center">
-								<a class="cart" href="#">Add to Cart</a>
-							</div>
-						</div>
-						<div class="lower-content">
-							<div class="rating">
-								<span class="fa fa-star"></span>
-								<span class="fa fa-star"></span>
-								<span class="fa fa-star"></span>
-								<span class="fa fa-star"></span>
-								<span class="light fa fa-star"></span>
-							</div>
-							<h6><a href="shop-detail.html">masks 95 percent 0.3-μm <br> particles</a></h6>
-							<div class="d-flex justify-content-between align-items-center">
-								<div class="price"><span>$239.52</span> $362.00</div>
-								<!-- Quantity Box -->
-								<div class="quantity-box">
-									<div class="item-quantity">
-										<input class="qty-spinner" type="text" value="1" name="quantity">
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<!-- Shop Item -->
-				<div class="shop-item">
-					<div class="inner-box">
-						<div class="image">
-							<a href="shop-detail.html"><img src="images/resource/products/4.png" alt="" /></a>
-							<span class="tag flaticon-heart"></span>
-							<div class="cart-box text-center">
-								<a class="cart" href="#">Add to Cart</a>
-							</div>
-						</div>
-						<div class="lower-content">
-							<div class="rating">
-								<span class="fa fa-star"></span>
-								<span class="fa fa-star"></span>
-								<span class="fa fa-star"></span>
-								<span class="fa fa-star"></span>
-								<span class="light fa fa-star"></span>
-							</div>
-							<h6><a href="shop-detail.html">masks 95 percent 0.3-μm <br> particles</a></h6>
-							<div class="d-flex justify-content-between align-items-center">
-								<div class="price"><span>$239.52</span> $362.00</div>
-								<!-- Quantity Box -->
-								<div class="quantity-box">
-									<div class="item-quantity">
-										<input class="qty-spinner" type="text" value="1" name="quantity">
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-
+                @endforeach
 			</div>
 		</div>
 	</section>
@@ -507,28 +286,28 @@
 		<div class="outer-container">
 			<div class="animation_mode">
 				<h1>Design. <span>Brand</span>. <strong>Quality</strong></h1>
-				<img src="images/icons/icon-1.png" alt="" />
-				<img src="images/icons/feature.png" alt="" />
-				<img src="images/icons/icon-2.png" alt="" />
+				<img src="shop/images/icons/icon-1.png" alt="" />
+				<img src="shop/images/icons/feature.png" alt="" />
+				<img src="shop/images/icons/icon-2.png" alt="" />
 				<h1>Design. <span>Brand</span>. <strong>Quality</strong></h1>
-				<img src="images/icons/icon-1.png" alt="" />
-				<img src="images/icons/feature.png" alt="" />
-				<img src="images/icons/icon-2.png" alt="" />
+				<img src="shop/images/icons/icon-1.png" alt="" />
+				<img src="shop/images/icons/feature.png" alt="" />
+				<img src="shop/images/icons/icon-2.png" alt="" />
 				<h1>Design. <span>Brand</span>. <strong>Quality</strong></h1>
-				<img src="images/icons/icon-1.png" alt="" />
-				<img src="images/icons/feature.png" alt="" />
-				<img src="images/icons/icon-2.png" alt="" />
+				<img src="shop/images/icons/icon-1.png" alt="" />
+				<img src="shop/images/icons/feature.png" alt="" />
+				<img src="shop/images/icons/icon-2.png" alt="" />
 				<h1>Design. <span>Brand</span>. <strong>Quality</strong></h1>
-				<img src="images/icons/icon-1.png" alt="" />
-				<img src="images/icons/feature.png" alt="" />
-				<img src="images/icons/icon-2.png" alt="" />
+				<img src="shop/images/icons/icon-1.png" alt="" />
+				<img src="shop/images/icons/feature.png" alt="" />
+				<img src="shop/images/icons/icon-2.png" alt="" />
 			</div>
 		</div>
 	</section>
 	<!-- End Brand Section -->
 
 	<!-- Sale Section -->
-	<section class="sale-section">
+	{{-- <section class="sale-section">
 		<div class="auto-container">
 			<div class="row clearfix">
 
@@ -574,7 +353,7 @@
 
 			</div>
 		</div>
-	</section>
+	</section> --}}
 	<!-- End Sale Section -->
 
 	<!-- Products Section Two -->
@@ -953,7 +732,7 @@
 	<!-- End Products Section Two -->
 
 	<!-- Counter Section -->
-	<section class="counter-section">
+	{{-- <section class="counter-section">
 		<div class="auto-container">
 			<div class="inner-container d-flex justify-content-between align-items-center flex-wrap">
 
@@ -996,15 +775,15 @@
 
 			</div>
 		</div>
-	</section>
+	</section> --}}
 	<!-- End Counter Section -->
 
 	<!-- Collection Section -->
-	<section class="collection-section">
+	{{-- <section class="collection-section">
 		<div class="auto-container">
 			<div class="inner-container">
-				<div class="pattern-layer" style="background-image: url(images/icons/pattern-1.png)"></div>
-				<div class="shape-layer" style="background-image: url(images/background/pattern-1.png)"></div>
+				<div class="pattern-layer" style="background-image: url(shop/images/icons/pattern-1.png)"></div>
+				<div class="shape-layer" style="background-image: url(shop/images/background/pattern-1.png)"></div>
 				<div class="row clearfix">
 					<div class="title-column col-lg-6 col-md-12 col-sm-12">
 						<div class="title">2021 Collection</div>
@@ -1029,11 +808,11 @@
 				</div>
 			</div>
 		</div>
-	</section>
+	</section> --}}
 	<!-- End Collection Section -->
 
 	<!-- Products Section Three -->
-	<section class="products-section-three">
+	{{-- <section class="products-section-three">
 		<div class="auto-container">
 			<!-- Sec Title -->
 			<div class="sec-title">
@@ -1323,11 +1102,11 @@
 
 			</div>
 		</div>
-	</section>
+	</section> --}}
 	<!-- End Products Section Three -->
 
 	<!-- Sponsors Section -->
-    <section class="sponsors-section">
+    {{-- <section class="sponsors-section">
         <div class="auto-container">
 			<div class="inner-container">
 				<div class="sponsors-outer">
@@ -1349,7 +1128,7 @@
 				</div>
             </div>
         </div>
-    </section>
+    </section> --}}
     <!-- End Sponsors Section -->
 
 	<!-- News Section -->

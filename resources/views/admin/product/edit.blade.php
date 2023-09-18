@@ -266,7 +266,7 @@
             input.classList.add('mb-3');
             input.innerHTML = `
                 <label for="" class="form-label">Gambar ${imageCount}</label>
-                <input type="file" name="images[]" class="form-control">
+                <input type="file" name="images[]" class="form-control" accept="image/*">
             `;
             document.querySelector('#input-images').appendChild(input);
         });

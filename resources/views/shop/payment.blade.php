@@ -58,7 +58,7 @@
                                             <td>Rp.{{ $transaction->sub_total }}</td>
                                         </tr>
                                         <tr>
-                                            <td>Ongkir</td>
+                                            <td>Biaya Pengiriman</td>
                                             <td>Rp.{{ number_format($transaction->delivery_cost) }}</td>
                                         </tr>
                                         <tr>
@@ -70,7 +70,89 @@
                             </div>
                         </div>
                     </div>
+                    <div class="card rounded-0">
+                        <div class="card-body">
+                            <h4>Pilih Metode Pembayaran</h4>
 
+                            <ul class="list-group list-group-flush">
+                                <li class="py-3 list-group-item">
+                                    <label class="w-100 d-flex">
+                                        <input type="radio" class="mx-2">
+                                        <span class="w-100 d-block"><img src="https://berrybenka.com/berrybenka/desktop/img/atm-bca-logo.jpg">Transfer BCA</span>
+                                        {{-- <div class="payment-info">
+                                            <i class="fa fa-bell"></i>
+                                            <strong>PANDUAN PEMBAYARAN:</strong><br>
+                                            <ul>
+                                                <li>Mohon membayar dalam 2x24 jam, jika tidak maka transaksi dibatalkan.</li>
+                                                <li>Mohon transfer tanpa pembulatan, sesuai angka yang tertera di tagihan.</li>
+                                                <li>Mohon cantumkan Kode Pembelian pada keterangan berita transfer.</li>
+                                                <li>Pembayaran untuk Kode Pembelian berbeda harus dilakukan secara terpisah.</li>
+                                                <li>Mohon lakukan konfirmasi setelah melakukan pembayaran.</li>
+                                            </ul>
+                                            <p class="mb10">
+                                            Bank BCA
+                                                <br>
+                                                a/n PT Grow Commerce Indonesia
+                                                <br>
+                                                No Rekening :
+                                                <strong>546 032 7077</strong>
+                                            </p>
+                                        </div> --}}
+                                    </label>
+                                </li>
+                                <li class="py-3 list-group-item">
+                                    <label class="w-100 d-flex">
+                                        <input type="radio" class="mx-2">
+                                        <span class="w-100 d-block"><img src="https://berrybenka.com/berrybenka/desktop/img/atm-bca-logo.jpg">Transfer BCA</span>
+                                        {{-- <div class="payment-info">
+                                            <i class="fa fa-bell"></i>
+                                            <strong>PANDUAN PEMBAYARAN:</strong><br>
+                                            <ul>
+                                                <li>Mohon membayar dalam 2x24 jam, jika tidak maka transaksi dibatalkan.</li>
+                                                <li>Mohon transfer tanpa pembulatan, sesuai angka yang tertera di tagihan.</li>
+                                                <li>Mohon cantumkan Kode Pembelian pada keterangan berita transfer.</li>
+                                                <li>Pembayaran untuk Kode Pembelian berbeda harus dilakukan secara terpisah.</li>
+                                                <li>Mohon lakukan konfirmasi setelah melakukan pembayaran.</li>
+                                            </ul>
+                                            <p class="mb10">
+                                            Bank BCA
+                                                <br>
+                                                a/n PT Grow Commerce Indonesia
+                                                <br>
+                                                No Rekening :
+                                                <strong>546 032 7077</strong>
+                                            </p>
+                                        </div> --}}
+                                    </label>
+                                </li>
+                                <li class="py-3 list-group-item">
+                                    <label class="w-100 d-flex">
+                                        <input type="radio" class="mx-2">
+                                        <span class="w-100 d-block"><img src="https://berrybenka.com/berrybenka/desktop/img/atm-bca-logo.jpg">Transfer BCA</span>
+                                        {{-- <div class="payment-info">
+                                            <i class="fa fa-bell"></i>
+                                            <strong>PANDUAN PEMBAYARAN:</strong><br>
+                                            <ul>
+                                                <li>Mohon membayar dalam 2x24 jam, jika tidak maka transaksi dibatalkan.</li>
+                                                <li>Mohon transfer tanpa pembulatan, sesuai angka yang tertera di tagihan.</li>
+                                                <li>Mohon cantumkan Kode Pembelian pada keterangan berita transfer.</li>
+                                                <li>Pembayaran untuk Kode Pembelian berbeda harus dilakukan secara terpisah.</li>
+                                                <li>Mohon lakukan konfirmasi setelah melakukan pembayaran.</li>
+                                            </ul>
+                                            <p class="mb10">
+                                            Bank BCA
+                                                <br>
+                                                a/n PT Grow Commerce Indonesia
+                                                <br>
+                                                No Rekening :
+                                                <strong>546 032 7077</strong>
+                                            </p>
+                                        </div> --}}
+                                    </label>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
                 <!-- Order Column -->
                 <div class="order-column col-lg-4 col-md-12 col-sm-12">
@@ -79,8 +161,8 @@
                         <!-- Order Box -->
                         <div class="order-box">
                             <ul class="order-totals">
-                                <li>Subtotal<span>Rp. {{ auth()->user()->total_cart }}</span></li>
-                                <li>Shipping Fee<span>$34.00</span></li>
+                                <li>Subtotal<span>Rp. {{ $transaction->sub_total }}</span></li>
+                                <li>Shipping Fee<span>Rp. {{ number_format($transaction->delivery_cost, 0, ',', ',') }}</span></li>
                             </ul>
 
                             <!-- Voucher Box -->
@@ -94,7 +176,7 @@
 							</div
 
                             <!-- Order Total -->
-                            <div class="order-total">Total <span>$345.00</span></div>
+                            <div class="order-total">Total <span>Rp. {{ $transaction->total_price }}</span></div>
 
                             <div class="button-box">
                                 <button class="theme-btn pay-btn">Procced to pay</button>
@@ -108,7 +190,7 @@
         </div>
     </section>
 
-    <section class="shoping-cart-section">
+    {{-- <section class="shoping-cart-section">
 		<div class="auto-container">
 			<div class="clearfix row">
 
@@ -170,7 +252,7 @@
                                             <td>Rp.{{ $transaction->sub_total }}</td>
                                         </tr>
                                         <tr>
-                                            <td>Ongkir</td>
+                                            <td>Biaya Pengiriman</td>
                                             <td>Rp.{{ number_format($transaction->delivery_cost) }}</td>
                                         </tr>
                                         <tr>
@@ -216,7 +298,7 @@
 				</div>
 			</div>
 		</div>
-	</section>
+	</section> --}}
     <!-- End Checkout Section -->
 
     <!-- Gallery Section -->

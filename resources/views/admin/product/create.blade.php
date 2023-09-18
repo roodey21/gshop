@@ -160,7 +160,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="" class="form-label">Gambar Utama (Untuk thumbnail)</label>
-                        <input type="file" name="images[0]" class="form-control">
+                        <input type="file" name="images[0]" class="form-control" accept="image/*">
                     </div>
                 </div>
             </div>
@@ -203,7 +203,7 @@
             input.classList.add('mb-3');
             input.innerHTML = `
                 <label for="" class="form-label">Gambar Lain ${imageCount}</label>
-                <input type="file" name="images[${imageCount}]" class="form-control">
+                <input type="file" name="images[${imageCount}]" class="form-control" accept="image/*">
             `;
             document.querySelector('#input-images').appendChild(input);
         });
