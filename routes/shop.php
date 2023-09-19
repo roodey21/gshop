@@ -21,6 +21,7 @@ Route::get('produk/{product:slug}', [ShopProductController::class, 'show'])->nam
 // route untuk menambahkan produk ke keranjang
 Route::middleware(['auth', 'role:user'])->group(function () {
     Route::get('/user/dashboard', [UserHomeController::class, 'index'])->name('user.dashboard');
+    Route::get('/user/transaction/{transaction}', [UserHomeController::class, 'show'])->name('user.transaction.show');
     Route::post('produk/{product:slug}/keranjang', [ShopCartController::class, 'store'])->name('shop.cart.add');
     Route::get('keranjang', [ShopCartController::class, 'index'])->name('shop.cart.index');
     Route::delete('keranjang/{cart}', [ShopCartController::class, 'destroy'])->name('shop.cart.destroy');
