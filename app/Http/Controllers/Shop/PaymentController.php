@@ -14,11 +14,14 @@ class PaymentController extends Controller
     //
     public function index(Transaction $transaction)
     {
+        if (auth()->user() && auth()->user()->carts->count() === 0) {
+            return redirect()->back()->with('error', 'Keranjang belanja Anda kosong.');
+        }
         $banks = Bank::isActive()->get();
         return view('shop.payment', compact('transaction', 'banks'));
     }
 
-    public function uploadProof(Request $request,Transaction $transaction)
+    public function uploadProof(Request $request, Transaction $transaction)
     {
         if ($transaction->user_id != auth()->id()) {
             abort(403);
