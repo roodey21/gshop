@@ -10,4 +10,9 @@ class Bank extends Model
     use HasFactory;
 
     protected $fillable = ['name', 'account_number', 'account_name','status'];
+
+    public function scopeIsActive($query)
+    {
+        return $query->where('status', 1);
+    }
 }

@@ -21,4 +21,8 @@ class TransactionDetail extends Model
         return $this->belongsTo(Product::class);
     }
 
+    public function getFormattedSubtotalAttribute()
+    {
+        return 'Rp. '. number_format($this->price * $this->qty, 0, ',', '.');
+    }
 }

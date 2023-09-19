@@ -4,7 +4,7 @@
     <section class="page-title">
         <div class="auto-container">
 			<h2>Produk Toko</h2>
-			<ul class="bread-crumb clearfix">
+			<ul class="clearfix bread-crumb">
 				<li><a href="index.html">Home</a></li>
 				<li>Produk</li>
 				<li>Produk Toko</li>
@@ -16,13 +16,13 @@
 	<!-- Sidebar Page Container -->
     <div class="sidebar-page-container">
     	<div class="auto-container">
-        	<div class="row clearfix">
+        	<div class="clearfix row">
 
 				<!-- Content Side -->
                 <div class="content-side col-lg-9 col-md-12 col-sm-12">
 					<!-- Filter Box -->
 					<div class="filter-box">
-						<div class="d-flex justify-content-between align-items-center flex-wrap">
+						<div class="flex-wrap d-flex justify-content-between align-items-center">
 							<!-- Left Box -->
 							<div class="left-box d-flex align-items-center">
 								{{-- <div class="results">Showing 1–12 of 54 results</div> --}}
@@ -43,7 +43,7 @@
 					<!-- End Filter Box -->
 
 					<div class="shops-outer">
-						<div class="row clearfix">
+						<div class="clearfix row">
 
                             @forelse($products as $product)
 							<!-- Shop Item -->
@@ -205,7 +205,7 @@
 						</div> --}}
 
 						<!-- Trending Widget -->
-						<div class="sidebar-widget trending-widget">
+						{{-- <div class="sidebar-widget trending-widget">
 							<div class="widget-content">
 								<div class="content">
 									<div class="vector-icon" style="background-image: url(images/icons/vector-3.png)"></div>
@@ -217,7 +217,7 @@
 									</div>
 								</div>
 							</div>
-						</div>
+						</div> --}}
 
 						{{-- <!-- Tags Widget -->
 						<div class="sidebar-widget-two tags-widget">

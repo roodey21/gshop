@@ -6,6 +6,7 @@ use App\Http\Controllers\Shop\ProductController as ShopProductController;
 use App\Http\Controllers\Shop\CartController as ShopCartController;
 use App\Http\Controllers\Shop\PaymentController;
 use App\Http\Controllers\Shop\TransactionController;
+use App\Http\Controllers\User\HomeController as UserHomeController;
 use Illuminate\Support\Facades\Route;
 
 /**
@@ -19,6 +20,7 @@ Route::get('produk/{product:slug}', [ShopProductController::class, 'show'])->nam
 
 // route untuk menambahkan produk ke keranjang
 Route::middleware(['auth', 'role:user'])->group(function () {
+    Route::get('/user/dashboard', [UserHomeController::class, 'index'])->name('user.dashboard');
     Route::post('produk/{product:slug}/keranjang', [ShopCartController::class, 'store'])->name('shop.cart.add');
     Route::get('keranjang', [ShopCartController::class, 'index'])->name('shop.cart.index');
     Route::delete('keranjang/{cart}', [ShopCartController::class, 'destroy'])->name('shop.cart.destroy');
@@ -31,7 +33,8 @@ Route::middleware(['auth', 'role:user'])->group(function () {
     Route::get('checkout/delivery-cost', [TransactionController::class, 'deliveryCost'])->name('shop.cart.cekOngkir');
     Route::get('checkout', [TransactionController::class, 'index'])->name('shop.cart.checkout');
     Route::post('checkout', [TransactionController::class, 'store'])->name('cart.checkout.store');
-    Route::get('payment/{id}', [PaymentController::class, 'index'])->name('shop.payment');
+    Route::get('payment/{transaction:code}', [PaymentController::class, 'index'])->name('shop.payment');
+    Route::put('payment/{transaction}', [PaymentController::class, 'uploadProof'])->name('shop.payment.upload-proof');
 });
 
 Route::get('seed-province', [ProvinceController::class, 'seedProvince']);

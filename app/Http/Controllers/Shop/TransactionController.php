@@ -9,6 +9,7 @@ use App\Models\City;
 use App\Models\Courier;
 use App\Models\Province;
 use App\Models\Transaction;
+use App\Models\TransactionHistory;
 use Illuminate\Support\Facades\Http;
 
 class TransactionController extends Controller
@@ -37,14 +38,18 @@ class TransactionController extends Controller
         $weight = $carts->sum(function ($cart) {
             return $cart->qty * $cart->product->weight;
         });
+
         $data = $request->validated();
         $data['user_id'] = auth()->id();
         $data['status'] = 0;
-        $data['code'] = 'INV/' . date('mdY') . rand(100, 999);
+        $data['code'] = date('dmY') . rand(100, 999);
         // dd($data);
         $data['delivery_cost'] = $this->cekOngkir($weight, $data['subdistrict'], $data['courier_id']);
 
         $transaction = Transaction::create($data);
+        $transaction->histories()->create([
+            'status' => $transaction->status,
+        ]);
         $carts->each(function ($cart) use ($transaction) {
             $transactionDetail = [
                 'transaction_id' => $transaction->id,
@@ -56,7 +61,7 @@ class TransactionController extends Controller
             $cart->delete();
         });
 
-        return redirect()->route('shop.payment', ['id' => $transaction->id])->with('success', 'Pesanan berhasil dibuat');
+        return redirect()->route('shop.payment', $transaction->code)->with('success', 'Pesanan berhasil dibuat');
     }
 
     public function cekOngkir($weight = 1000, $destination, $courier_id)

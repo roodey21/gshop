@@ -2,7 +2,7 @@
     <!-- Page Title -->
     <section class="page-title">
         <div class="auto-container">
-            <h2>Pilih Pembayaran</h2>
+            <h2>Detail Transaksi</h2>
         </div>
     </section>
     <!-- End Page Title -->
@@ -10,185 +10,178 @@
    <!-- Checkout Section -->
     <section class="checkout-section">
         <div class="auto-container">
-            <div class="clearfix row">
-
-                <!-- Form Column -->
-                <div class="form-column col-lg-8 col-md-12 col-sm-12">
-                    <div class="form-column col-lg-12 col-md-12 col-sm-12">
-                        <div class="mb-4 inner-column ">
-                            <h4>Detail Pengiriman</h4>
-                            <div class="card">
-                                <table class="table table-borderless table-striped table-responsive">
-                                    <tbody>
-                                        <tr>
-                                            <th>Nama Pembeli</th>
-                                            <td>{{ $transaction->name }}</td>
-                                        </tr>
-                                        <tr>
-                                            <th>Alamat Pengiriman</th>
-                                            <td>{{ $transaction->address }}</td>
-                                        </tr>
-                                        <tr>
-                                            <th>Kurir</th>
-                                            <td>{{ $transaction->courier->name }}</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                        <div class="inner-column">
-                            <h4>Detail Barang</h4>
-                            <div class="card">
-                                <table class="table table-borderless table-striped table-responsive">
-                                    <thead>
-                                        <tr>
-                                            <th>Barang</th>
-                                            <th>Harga</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach ($transaction->transactionDetails as $transactionDetail)
-                                            <tr>
-                                                    <td>{{ $transactionDetail->product->name }} - {{ $transactionDetail->qty }} X </td>
-                                                    <td>Rp.{{  number_format($transactionDetail->price * $transactionDetail->qty) }}</td>
-                                            </tr>
-                                        @endforeach
-                                        <tr>
-                                            <td>Subtotal</td>
-                                            <td>Rp.{{ $transaction->sub_total }}</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Biaya Pengiriman</td>
-                                            <td>Rp.{{ number_format($transaction->delivery_cost) }}</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="fw-bold">Harga Total</td>
-                                            <td class="fw-bold">Rp.{{ $transaction->total_price }}</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+            <form action="{{ route('shop.payment.upload-proof', $transaction->id) }}" method="POST" enctype="multipart/form-data" class="clearfix row">
+                @csrf
+                @method('PUT')
+                <div class="mb-5 col-12">
+                    <div class="card rounded-0 border-thinner">
+                        <div class="card-body" style="padding: 25px">
+                            <div class="row">
+                                <div class="text-center col-md-4">
+                                    <h6>Nomor Invoice</h6>
+                                    <p>{{ $transaction->invoice }}</p>
+                                </div>
+                                <div class="text-center col-md-4">
+                                    <h6>Tanggal Transaksi</h6>
+                                    <p>{{ $transaction->created_at->format('d M Y, h:i a') }}</p>
+                                </div>
+                                <div class="text-center col-md-4">
+                                    <h6>Status Pesanan <i class="ms-1 fa fa-refresh" style="cursor: pointer" onclick="location.reload()"></i></h6>
+                                    <p>{{ $transaction->status_name['text'] }}</p>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class="card rounded-0">
+                </div>
+                <!-- Form Column -->
+                <div class="form-column col-lg-8 col-md-12 col-sm-12">
+                    <div class="mb-4 inner-column ">
+                        <h4>Detail Pengiriman</h4>
+                        <div class="card rounded-0 border-thinner">
+                            <table class="table table-borderless table-striped table-responsive">
+                                <tbody>
+                                    <tr>
+                                        <th>Nama Pembeli</th>
+                                        <td>{{ $transaction->name }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Alamat Pengiriman</th>
+                                        <td>{{ $transaction->address }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Kurir</th>
+                                        <td>{{ $transaction->courier->name }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="mb-4 inner-column">
+                        <h4>Detail Barang</h4>
+                        <div class="card rounded-0 border-thinner">
+                            <table class="table table-borderless table-striped table-responsive">
+                                <thead>
+                                    <tr>
+                                        <th>Barang</th>
+                                        <th>Qty</th>
+                                        <th width="200">Harga</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($transaction->transactionDetails as $transactionDetail)
+                                        <tr>
+                                                <td>{{ $transactionDetail->product->name }}</td>
+                                                <td>{{ $transactionDetail->qty }} x</td>
+                                                <td>Rp.{{  number_format($transactionDetail->price * $transactionDetail->qty) }}</td>
+                                        </tr>
+                                    @endforeach
+                                    <tr>
+                                        <td colspan="2">Subtotal</td>
+                                        <td>Rp.{{ $transaction->sub_total }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2">Biaya Pengiriman</td>
+                                        <td>Rp.{{ number_format($transaction->delivery_cost) }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="fw-bold" colspan="2">Harga Total</td>
+                                        <td class="fw-bold">Rp.{{ $transaction->total_price }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    @if($transaction->status == 0)
+                    <div class="card rounded-0 border-thinner">
                         <div class="card-body">
                             <h4>Pilih Metode Pembayaran</h4>
 
                             <ul class="list-group list-group-flush">
+                                @foreach ($banks as $bank)
                                 <li class="py-3 list-group-item">
                                     <label class="w-100 d-flex">
-                                        <input type="radio" class="mx-2">
-                                        <span class="w-100 d-block"><img src="https://berrybenka.com/berrybenka/desktop/img/atm-bca-logo.jpg">Transfer BCA</span>
-                                        {{-- <div class="payment-info">
-                                            <i class="fa fa-bell"></i>
-                                            <strong>PANDUAN PEMBAYARAN:</strong><br>
-                                            <ul>
-                                                <li>Mohon membayar dalam 2x24 jam, jika tidak maka transaksi dibatalkan.</li>
-                                                <li>Mohon transfer tanpa pembulatan, sesuai angka yang tertera di tagihan.</li>
-                                                <li>Mohon cantumkan Kode Pembelian pada keterangan berita transfer.</li>
-                                                <li>Pembayaran untuk Kode Pembelian berbeda harus dilakukan secara terpisah.</li>
-                                                <li>Mohon lakukan konfirmasi setelah melakukan pembayaran.</li>
-                                            </ul>
-                                            <p class="mb10">
-                                            Bank BCA
-                                                <br>
-                                                a/n PT Grow Commerce Indonesia
-                                                <br>
-                                                No Rekening :
-                                                <strong>546 032 7077</strong>
-                                            </p>
-                                        </div> --}}
+                                        <input type="radio" name="payment_method" value="{{ $bank->id }}" class="mx-2" required>
+                                        <span class="w-100 d-block fw-semibold"><img src="https://berrybenka.com/berrybenka/desktop/img/atm-bca-logo.jpg" class="me-2">{{ $bank->name }} (Pengecekan Manual)</span>
                                     </label>
+                                    <div class="mt-3 alert alert-warning panduan-transfer" role="alert" id="bank-{{ $bank->id }}" style="display: none">
+                                        <h6 class="mb-2 text-uppercase fs-6 fw-bold"><i class="fa fa-bell me-2"></i>Panduan Pembayaran</h6>
+                                        <hr>
+                                        <ul>
+                                            <li>Mohon membayar dalam 2x24 jam, jika tidak maka transaksi dibatalkan.</li>
+                                            <li>Mohon transfer tanpa pembulatan, sesuai angka yang tertera di tagihan.</li>
+                                            <li>Mohon cantumkan Kode Pembelian pada keterangan berita transfer (Bila Ada).</li>
+                                            <li>Pembayaran untuk Kode Pembelian berbeda harus dilakukan secara terpisah.</li>
+                                            <li>Mohon lakukan konfirmasi setelah melakukan pembayaran.</li>
+                                        </ul>
+                                        <hr>
+                                        <div>
+                                            <p class="mb-0 text-dark fw-semibold">{{ $bank->name }}</p>
+                                            <p class="mb-0 text-dark fw-semibold">a/n <span>{{ $bank->account_name }}</span></p>
+                                            <p class="mb-0 text-dark fw-semibold">Nomor Rekening :<span>{{ $bank->account_number }}</span></p>
+                                        </div>
+                                    </div>
                                 </li>
-                                <li class="py-3 list-group-item">
-                                    <label class="w-100 d-flex">
-                                        <input type="radio" class="mx-2">
-                                        <span class="w-100 d-block"><img src="https://berrybenka.com/berrybenka/desktop/img/atm-bca-logo.jpg">Transfer BCA</span>
-                                        {{-- <div class="payment-info">
-                                            <i class="fa fa-bell"></i>
-                                            <strong>PANDUAN PEMBAYARAN:</strong><br>
-                                            <ul>
-                                                <li>Mohon membayar dalam 2x24 jam, jika tidak maka transaksi dibatalkan.</li>
-                                                <li>Mohon transfer tanpa pembulatan, sesuai angka yang tertera di tagihan.</li>
-                                                <li>Mohon cantumkan Kode Pembelian pada keterangan berita transfer.</li>
-                                                <li>Pembayaran untuk Kode Pembelian berbeda harus dilakukan secara terpisah.</li>
-                                                <li>Mohon lakukan konfirmasi setelah melakukan pembayaran.</li>
-                                            </ul>
-                                            <p class="mb10">
-                                            Bank BCA
-                                                <br>
-                                                a/n PT Grow Commerce Indonesia
-                                                <br>
-                                                No Rekening :
-                                                <strong>546 032 7077</strong>
-                                            </p>
-                                        </div> --}}
-                                    </label>
-                                </li>
-                                <li class="py-3 list-group-item">
-                                    <label class="w-100 d-flex">
-                                        <input type="radio" class="mx-2">
-                                        <span class="w-100 d-block"><img src="https://berrybenka.com/berrybenka/desktop/img/atm-bca-logo.jpg">Transfer BCA</span>
-                                        {{-- <div class="payment-info">
-                                            <i class="fa fa-bell"></i>
-                                            <strong>PANDUAN PEMBAYARAN:</strong><br>
-                                            <ul>
-                                                <li>Mohon membayar dalam 2x24 jam, jika tidak maka transaksi dibatalkan.</li>
-                                                <li>Mohon transfer tanpa pembulatan, sesuai angka yang tertera di tagihan.</li>
-                                                <li>Mohon cantumkan Kode Pembelian pada keterangan berita transfer.</li>
-                                                <li>Pembayaran untuk Kode Pembelian berbeda harus dilakukan secara terpisah.</li>
-                                                <li>Mohon lakukan konfirmasi setelah melakukan pembayaran.</li>
-                                            </ul>
-                                            <p class="mb10">
-                                            Bank BCA
-                                                <br>
-                                                a/n PT Grow Commerce Indonesia
-                                                <br>
-                                                No Rekening :
-                                                <strong>546 032 7077</strong>
-                                            </p>
-                                        </div> --}}
-                                    </label>
-                                </li>
+                                @endforeach
                             </ul>
                         </div>
                     </div>
+                    @endif
                 </div>
                 <!-- Order Column -->
                 <div class="order-column col-lg-4 col-md-12 col-sm-12">
                     <div class="inner-column">
-                        <h4>Payment</h4>
+                        <h4>Upload Bukti Pembayaran</h4>
                         <!-- Order Box -->
                         <div class="order-box">
                             <ul class="order-totals">
-                                <li>Subtotal<span>Rp. {{ $transaction->sub_total }}</span></li>
-                                <li>Shipping Fee<span>Rp. {{ number_format($transaction->delivery_cost, 0, ',', ',') }}</span></li>
+                                <li>Total pembayaran<span>Rp. {{ $transaction->total_price }}</span></li>
                             </ul>
-
-                            <!-- Voucher Box -->
-                            <div class="voucher-box">
-								<form method="post" action="contact.html">
-									<div class="form-group">
-										<input type="email" name="search-field" value="" placeholder="Enter voucher Code" required>
-										<button type="submit" class="theme-btn apply-btn">Apply code</button>
-									</div>
-								</form>
-							</div
-
-                            <!-- Order Total -->
-                            <div class="order-total">Total <span>Rp. {{ $transaction->total_price }}</span></div>
-
-                            <div class="button-box">
-                                <button class="theme-btn pay-btn">Procced to pay</button>
-                            </div>
-
+                            @if ($transaction->status == 0)
+                                <input type="file" class="custom-dile-input form-control-lg rounded-0" name="proof" style="height: 70px; " required>
+                                @error('proof')
+                                    <div class="mt-2 alert alert-danger">{{ $message }}</div>
+                                @enderror
+                                <div class="button-box">
+                                    <button class="theme-btn pay-btn" type="submit">Upload Bukti Pembayaran</button>
+                                </div>
+                            @else
+                                <h6 class="text-center fs-6 fw-semibold">Anda sudah upload bukti transfer</h6>
+                            @endif
                         </div>
                     </div>
                 </div>
 
-            </div>
+            </form>
         </div>
     </section>
+    @push('css')
+        <style>
+            .panduan-transfer ul {
+                list-style: disc;
+            }
+            .panduan-transfer li {
+                list-style: disc;
+                padding: 0.1rem;
+                margin-left: 1.5rem;
+            }
+            th, td {
+                padding-top: 1rem!important;
+                padding-bottom: 1rem!important;
+            }
+            .border-thinner {
+                border: 1px solid rgba(0,0,0, 0.10)
+            }
+        </style>
+    @endpush
+    @push('js')
+        <script>
+            $('input[name=method]').on('change', function() {
+                console.log('ok')
+                $('.panduan-transfer').hide();
+                $('#bank-' + $(this).val()).show();
+            });
+        </script>
+    @endpush
 
     {{-- <section class="shoping-cart-section">
 		<div class="auto-container">
