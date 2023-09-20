@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Shop;
 
-use App\Http\Requests\UpdateSettingRequest;
-use App\Models\Setting;
+use App\Http\Controllers\Controller;
+use App\Models\About;
 use Illuminate\Http\Request;
 
-class SettingController extends Controller
+class AboutController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,8 +14,7 @@ class SettingController extends Controller
     public function index()
     {
         //
-        $setting = Setting::first();
-        return view('admin.setting.index', compact('setting'));
+        return view('shop.about');
     }
 
     /**
@@ -37,7 +36,7 @@ class SettingController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Setting $setting)
+    public function show(About $about)
     {
         //
     }
@@ -45,7 +44,7 @@ class SettingController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Setting $setting)
+    public function edit(About $about)
     {
         //
     }
@@ -53,18 +52,15 @@ class SettingController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateSettingRequest $request, Setting $setting)
+    public function update(Request $request, About $about)
     {
         //
-        $data = $request->validated();
-        $setting->update($data);
-        return redirect()->route('admin.setting.index')->with('success', 'Info Website berhasil diupdate');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Setting $setting)
+    public function destroy(About $about)
     {
         //
     }

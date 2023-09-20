@@ -1,10 +1,12 @@
 <?php
 
+use App\Http\Controllers\AboutController;
 use App\Http\Controllers\BankController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CourierController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SettingController;
 use App\Http\Controllers\TransactionController;
 use Illuminate\Support\Facades\Route;
 
@@ -32,6 +34,7 @@ Route::middleware(['auth', 'role:admin'])->prefix('dashboard')->name('admin.')->
     Route::get('courier', [CourierController::class, 'index'])->name('courier.index');
     Route::get('courier/edit', [CourierController::class, 'edit'])->name('courier.edit');
     Route::put('courier/edit', [CourierController::class, 'update'])->name('courier.update');
+    Route::resource('setting', SettingController::class);
 });
 
 Route::middleware('auth')->group(function () {
