@@ -61,7 +61,7 @@
                             <div>
                                 <textarea class="form-control" name="description" id="description"
                                     placeholder="Beritahu Customer tentang anda">
-                                {{ old('description') }}
+                                {{ old('description', $setting->description) }}
                             </textarea>
                                 @error('description')
                                 <div class="invalid-feedback">{{ $message }}</div>
