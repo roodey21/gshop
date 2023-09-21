@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::table('settings', function (Blueprint $table) {
             //
             Schema::table('settings', function (Blueprint $table) {
-                $table->string('description')->nullable();
+                $table->text('description')->nullable();
             });
         });
     }

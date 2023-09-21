@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Shop;
 
 use App\Http\Controllers\Controller;
-use App\Models\About;
+use App\Models\Setting;
 use Illuminate\Http\Request;
 
 class AboutController extends Controller
@@ -14,7 +14,8 @@ class AboutController extends Controller
     public function index()
     {
         //
-        return view('shop.about');
+        $setting = Setting::first();
+        return view('shop.about', compact('setting'));
     }
 
     /**
@@ -36,7 +37,7 @@ class AboutController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(About $about)
+    public function show(Setting $setting)
     {
         //
     }
@@ -44,7 +45,7 @@ class AboutController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(About $about)
+    public function edit(Setting $setting)
     {
         //
     }
@@ -52,7 +53,7 @@ class AboutController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, About $about)
+    public function update(Request $request, Setting $setting)
     {
         //
     }
@@ -60,7 +61,7 @@ class AboutController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(About $about)
+    public function destroy(Setting $setting)
     {
         //
     }
