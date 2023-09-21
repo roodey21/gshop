@@ -44,7 +44,12 @@ class TransactionController extends Controller
         $data['status'] = 0;
         $data['code'] = date('dmY') . rand(100, 999);
         // dd($data);
-        $data['delivery_cost'] = $this->cekOngkir($weight, $data['subdistrict'], $data['courier_id']);
+        if ($data['courier_id'] == 1) {
+            $data['delivery_cost'] = 0;
+        } else {
+            $data['delivery_cost'] = $this->cekOngkir($weight, $data['subdistrict'], $data['courier_id']);
+        }
+        // $data['delivery_cost'] = $this->cekOngkir($weight, $data['subdistrict'], $data['courier_id']);
 
         $transaction = Transaction::create($data);
         $transaction->histories()->create([

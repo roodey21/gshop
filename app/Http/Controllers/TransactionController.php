@@ -58,10 +58,9 @@ class TransactionController extends Controller
             'confirm' => 'required|in:PENDING,SUCCESS,FAILED',
         ]);
 
-        if($validated['confirm'] == 'SUCCESS') {
+        if ($validated['confirm'] == 'SUCCESS') {
             $status = 2;
-        }
-        else if($validated['confirm'] == 'FAILED') {
+        } else if ($validated['confirm'] == 'FAILED') {
             $status = 5;
         }
         $transaction->update([
@@ -99,5 +98,18 @@ class TransactionController extends Controller
     public function destroy(Transaction $transaction)
     {
         //
+    }
+
+    public function finishOrder(Transaction $transaction)
+    {
+        $transaction->update([
+            'status' => 4
+        ]);
+
+        $transaction->histories()->create([
+            'status' => $transaction->status,
+        ]);
+
+        return redirect()->back()->with('success', 'Pesanan telah berhasil dikonfirmasi');
     }
 }
