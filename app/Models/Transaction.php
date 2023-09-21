@@ -58,6 +58,11 @@ class Transaction extends Model implements HasMedia
         return $this->belongsTo(Bank::class, 'payment_method');
     }
 
+    public function reviews()
+    {
+        return $this->hasMany(ProductReview::class);
+    }
+
     public function getSubTotalAttribute()
     {
         $total = 0;
@@ -89,6 +94,15 @@ class Transaction extends Model implements HasMedia
             default => 'red'
         };
 
+        $color_bs4 = match ($this->status) {
+            0 => 'secondary',
+            1 => 'warning',
+            2 => 'info',
+            3 => 'success',
+            4 => 'success',
+            default => 'danger'
+        };
+
         $text = match ($this->status) {
             0 => 'Menunggu Pembayaran',
             1 => 'Menunggu Konfirmasi',
@@ -99,7 +113,8 @@ class Transaction extends Model implements HasMedia
         };
         return [
             'text' => $text,
-            'color' => $color
+            'color' => $color,
+            'color_bs4' => $color_bs4
         ];
     }
 

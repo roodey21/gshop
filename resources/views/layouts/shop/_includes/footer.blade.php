@@ -15,7 +15,7 @@
                         <div class="footer-column col-lg-7 col-md-6 col-sm-12">
                             <div class="footer-widget links-widget">
                                 <!-- Logo -->
-                                <div class="logo"><a href="index.html"><img src="images/logo.png" alt="" title=""></a></div>
+                                <div class="logo"><a href="{{ route('shop.index') }}"><img src="{{ asset('shop/images/logo.png') }}" class="img-fluid" alt="" title="" style="max-height: 100px"></a></div>
                                 <div class="text">{{ $web_setting->address }} </div>
                                 <ul class="contact-list">
                                     <li><span class="icon flaticon-email"></span>{{ $web_setting->email }}</li>

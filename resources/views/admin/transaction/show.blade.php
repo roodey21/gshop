@@ -182,7 +182,7 @@
                                 @endif
                                 @if ($history->status == 4)
                                 <div class="text-secondary">Pesanan Sudah sampai </div>
-                            @endif
+                                @endif
                             </li>
                         @endforeach
                     </ul>
@@ -273,9 +273,13 @@
                                 <tr>
                                     <td class="fs-4 fw-semibold">Bukti Transfer</td>
                                     <td class="text-end">
+                                        @if($transaction->status == 0)
+                                        -
+                                        @else
                                         <a href="#" data-bs-toggle="modal" data-bs-target="#modal-bukti-transfer">
                                             lihat Bukti Tf
                                         </a>
+                                        @endif
                                     </td>
                                 </tr>
                             </table>
@@ -346,7 +350,7 @@
                 </div>
                 <div class="modal-body">
                     <img src="{{ $transaction->payment_proof }}" alt="" class="img-fluid">
-                    <div class="form-group">
+                    <div class="form-group mt-2">
                         <label for="" class="form-label">Konfirmasi Pembayaran</label>
                         <select name="confirm" id="" class="form-select">
                             <option value="">Pilih Status</option>

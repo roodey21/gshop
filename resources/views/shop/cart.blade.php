@@ -2,11 +2,11 @@
     <!-- Page Title -->
     <section class="page-title">
         <div class="auto-container">
-			<h2>Cart Page</h2>
+			<h2>Keranjang</h2>
 			<ul class="clearfix bread-crumb">
-				<li><a href="index.html">Home</a></li>
-				<li>Pages</li>
-				<li>Cart Page</li>
+				<li><a href="{{ route('shop.index') }}">Home</a></li>
+				<li>User</li>
+				<li>Keranjang</li>
 			</ul>
         </div>
     </section>
@@ -15,6 +15,8 @@
 	<!-- Shoping Cart Section -->
 	<section class="shoping-cart-section">
 		<div class="auto-container">
+            <x-shop.user-tab />
+
 			<div class="clearfix row">
 
 				<!-- Cart Column -->

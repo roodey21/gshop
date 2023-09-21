@@ -50,7 +50,7 @@ class Product extends Model implements HasMedia
 
     public function getThumbnailAttribute()
     {
-        return $this->getFirstMediaUrl('product-images') ?: asset('shop/images/resource/products/1.png');
+        return $this->getFirstMediaUrl('product-images', 'thumb') ?: asset('shop/images/resource/products/1.png');
     }
 
     public function getFormattedPriceAttribute()
@@ -61,6 +61,11 @@ class Product extends Model implements HasMedia
     public function transactions()
     {
         return $this->hasMany(Transaction::class);
+    }
+
+    public function reviews()
+    {
+        return $this->hasMany(ProductReview::class);
     }
 
     public function carts()

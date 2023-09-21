@@ -99,6 +99,19 @@ class TransactionController extends Controller
         return $results;
     }
 
+    public function confirm(Transaction $transaction)
+    {
+        $transaction->update([
+            'status' => 4
+        ]);
+
+        $transaction->histories()->create([
+            'status' => $transaction->status,
+        ]);
+
+        return redirect()->back()->with('success', 'Pesanan telah berhasil dikonfirmasi');
+    }
+
     public function deliveryCost()
     {
         $carts = auth()->user()->carts;

@@ -75,7 +75,7 @@
                         </div>
 
                         <!-- User Box -->
-                        <a class="user-box flaticon-user-3" href="contact.html"></a>
+                        <a class="user-box flaticon-user-3" style="display: block" href="{{ route('user.account') }}"></a>
 
                         <!-- Like Box -->
                         {{-- <div class="like-box">

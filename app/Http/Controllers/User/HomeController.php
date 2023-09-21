@@ -20,4 +20,17 @@ class HomeController extends Controller
         $histories = $transaction->histories()->latest()->get();
         return view('user.transaction.show', compact('transaction', 'histories'));
     }
+
+    public function account()
+    {
+        $transactions = Transaction::where('user_id', Auth::user()->id)->latest()->paginate(10);
+        return view('user.account', compact('transactions'));
+    }
+
+    public function review()
+    {
+        $transactions = Transaction::where('user_id', Auth::user()->id)->latest()->paginate(10);
+        return view('user.review', compact('transactions'));
+    }
+
 }

@@ -3,6 +3,12 @@
     <section class="page-title">
         <div class="auto-container">
             <h2>Detail Transaksi</h2>
+            <ul class="clearfix bread-crumb">
+                <li><a href="{{ route('shop.index') }}">Home</a></li>
+                <li>User</li>
+                <li>Transaksi</li>
+                <li>Detail Transaksi</li>
+            </ul>
         </div>
     </section>
     <!-- End Page Title -->
@@ -10,6 +16,17 @@
    <!-- Checkout Section -->
     <section class="checkout-section">
         <div class="auto-container">
+            <x-shop.user-tab />
+            @if($transaction->status == 3)
+            <form action="{{ route('user.transaction.confirm', $transaction->id) }}" class="alert alert-info rounded-0 fs-6" method="POST">
+                @csrf
+                @method('PUT')
+                <span class="d-block mb-1">
+                    Apakah pesanan anda sudah sampai di rumahmu? Silahkan konfirmasi penerimaan pesananmu dengan klik tombol berikut.
+                </span>
+                <button class="btn btn-sm btn-primary">Pesanan telah diterima</button>
+            </form>
+            @endif
             <form action="{{ route('shop.payment.upload-proof', $transaction->id) }}" method="POST" enctype="multipart/form-data" class="clearfix row">
                 @csrf
                 @method('PUT')
@@ -27,7 +44,7 @@
                                 </div>
                                 <div class="text-center col-md-4">
                                     <h6>Status Pesanan <i class="ms-1 fa fa-refresh" style="cursor: pointer" onclick="location.reload()"></i></h6>
-                                    <p>{{ $transaction->status_name['text'] }}</p>
+                                    <span class="badge bg-{{ $transaction->status_name['color_bs4'] }}"  style="font-size: 12px;">{{ $transaction->status_name['text'] }}</span>
                                 </div>
                             </div>
                         </div>
@@ -175,7 +192,7 @@
     @endpush
     @push('js')
         <script>
-            $('input[name=method]').on('change', function() {
+            $('input[name=payment_method]').on('change', function() {
                 console.log('ok')
                 $('.panduan-transfer').hide();
                 $('#bank-' + $(this).val()).show();
