@@ -22,6 +22,8 @@
 
     <!-- Checkout Section -->
     <section class="checkout-section">
+
+        {{ $errors }}
         <div class="auto-container">
             <div class="clearfix row">
 
@@ -93,12 +95,13 @@
                                             value="{{ old('address') }}" placeholder="Alamat Lengkap" required>
                                     </div>
 
-                                    <div class="col-lg-12 col-md-12 col-sm-12 form-group" id="courier-select" style="display: none">
+                                    <div class="col-lg-12 col-md-12 col-sm-12 form-group" id="courier-select"
+                                        style="display: none">
                                         <select name="courier_id"
                                             class="custom-select-box @error('courier_id') is-invalid @enderror"
                                             id="courier_id">
                                             <option value="" selected>Pilih Kurir</option>
-                                            <option value="ambil">Ambil ditoko</option>
+                                            {{-- <option value="ambil">Ambil ditoko</option> --}}
                                             @forelse ($couriers as $courier)
                                                 @if ($courier->status == 1)
                                                     <option value="{{ $courier->id }}">
@@ -139,7 +142,7 @@
                             </ul>
 
                             <!-- Order Total -->
-                            <div class="order-total">Total <span  class="grand-total"></span></div>
+                            <div class="order-total">Total <span class="grand-total"></span></div>
 
                             <div class="button-box">
                                 <button type="submit" class="theme-btn pay-btn">Lanjut Pembayaran</button>
@@ -165,7 +168,7 @@
             let province_id = null;
             let city_id = null;
             let subdistrict_id = null;
-            let weight = "{{ auth()->user()->carts->sum(function ($cart) { return $cart->qty * $cart->product->weight; }) }}";
+            let weight = "{{ auth()->user()->carts->sum(function ($cart) {return $cart->qty * $cart->product->weight;}) }}";
             let total_cart = "{{ auth()->user()->total_cart }}";
             let subtotal = parseInt(total_cart.replace(",", ""));
             let delivery_cost = 0;
@@ -244,20 +247,25 @@
             $('select[name=courier_id]').on('selectmenuchange', function() {
                 const courier_id = $(this).val();
                 console.log(courier_id)
-                $.ajax({
-                    url: '{{ route('shop.cart.cekOngkir') }}',
-                    method: 'GET',
-                    data: {
-                        destination: $('select[name=subdistrict]').val(),
-                        courier_id: courier_id
-                    },
-                    success: function(res) {
-                        console.log(res)
-                        delivery_cost = res.data;
+                if (courier_id === '1') {
+                    delivery_cost = 0;
+                    $('.delivery-cost').html('Rp. ' + delivery_cost);
+                } else {
+                    $.ajax({
+                        url: '{{ route('shop.cart.cekOngkir') }}',
+                        method: 'GET',
+                        data: {
+                            destination: $('select[name=subdistrict]').val(),
+                            courier_id: courier_id
+                        },
+                        success: function(res) {
+                            console.log(res)
+                            delivery_cost = res.data;
 
-                        $('.delivery-cost').html('Rp. ' + delivery_cost);
-                    }
-                });
+                            $('.delivery-cost').html('Rp. ' + delivery_cost);
+                        }
+                    });
+                }
             });
 
             // $( "select[name=province]" ).selectmenu({

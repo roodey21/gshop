@@ -1,23 +1,23 @@
 <x-app-layout>
     @push('header')
-    <x-header>
-        <x-slot:page_title>
-            Detail Transaksi
-        </x-slot:page_title>
-        <x-slot:right_side>
-            <a href="{{ route('admin.transaction.index') }}" class="btn btn-outline-secondary">
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-arrow-narrow-left"
-                    width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
-                    stroke-linecap="round" stroke-linejoin="round">
-                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                    <path d="M5 12l14 0"></path>
-                    <path d="M5 12l4 4"></path>
-                    <path d="M5 12l4 -4"></path>
-                </svg>
-                Kembali
-            </a>
-        </x-slot:right_side>
-    </x-header>
+        <x-header>
+            <x-slot:page_title>
+                Detail Transaksi
+            </x-slot:page_title>
+            <x-slot:right_side>
+                <a href="{{ route('admin.transaction.index') }}" class="btn btn-outline-secondary">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-arrow-narrow-left"
+                        width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                        <path d="M5 12l14 0"></path>
+                        <path d="M5 12l4 4"></path>
+                        <path d="M5 12l4 -4"></path>
+                    </svg>
+                    Kembali
+                </a>
+            </x-slot:right_side>
+        </x-header>
     @endpush
 
     <div class="row row-cards">
@@ -36,17 +36,17 @@
                         </svg>
                     </div>
                     @if ($transaction->status == 0)
-                    <div>
-                        Pembeli belum melakukan pembayaran, silahkan tunggu pembayaran dari pembeli.
-                    </div>
+                        <div>
+                            Pembeli belum melakukan pembayaran, silahkan tunggu pembayaran dari pembeli.
+                        </div>
                     @elseif ($transaction->status == 1)
-                    <div>
-                        Pembeli sudah melakukan pembayaran, silahkan cek bukti pembayaran dan konfirmasi pembayaran.
-                    </div>
+                        <div>
+                            Pembeli sudah melakukan pembayaran, silahkan cek bukti pembayaran dan konfirmasi pembayaran.
+                        </div>
                     @elseif($transaction->status == 2)
-                    <div>
-                        Pembayaran sudah dikonfirmasi, silahkan kirim barang ke pembeli.
-                    </div>
+                        <div>
+                            Pembayaran sudah dikonfirmasi, silahkan kirim barang ke pembeli.
+                        </div>
                     @endif
                 </div>
             </div>
@@ -79,8 +79,8 @@
                                 Metode Pengiriman
                             </h3>
                             <span>
-                                {{ $transaction->courier->name }} <span class="text-uppercase">({{
-                                    $transaction->courier->code }})</span>
+                                {{ $transaction->courier->name }} <span
+                                    class="text-uppercase">({{ $transaction->courier->code }})</span>
                             </span>
                         </div>
                         <div class="col-lg-3 col-md-3">
@@ -100,8 +100,21 @@
                             <h3 class="mb-0 fs-4 fw-semibold">
                                 Status Transaksi
                             </h3>
-                            <span class="badge bg-{{ $transaction->status_name['color'] }}">
+                            <span class="badge bg-{{ $transaction->status_name['color'] }} mb-1">
                                 {{ $transaction->status_name['text'] }}
+                            </span>
+                            <span class="d-block">
+                                @if ($transaction->status == 3)
+                                    <form action="{{ route('admin.transaction.finish-order', $transaction->id) }}"
+                                        class="alert alert-info rounded-0 fs-6" method="POST">
+                                        @csrf
+                                        @method('PUT')
+                                        <span class="d-block mb-1">
+                                            Selesaikan Pesanan jika customer tidak segera mengkonfirmasi penerimaan
+                                        </span>
+                                        <button class="btn btn-sm btn-primary">Selesaikan Pesanan</button>
+                                    </form>
+                                @endif
                             </span>
                         </div>
                     </div>
@@ -119,35 +132,37 @@
                                 </thead>
                                 <tbody>
                                     @forelse ($transaction->transactionDetails as $detail)
-                                    <tr>
-                                        <td>
-                                            <div class="py-1 d-flex align-items-center">
-                                                <span class="avatar me-2"
-                                                    style="background-image: url({{ $detail->product->thumbnail }})"></span>
-                                                <div class="flex-fill">
-                                                    <div class="font-weight-medium">{{ $detail->product->name }}</div>
+                                        <tr>
+                                            <td>
+                                                <div class="py-1 d-flex align-items-center">
+                                                    <span class="avatar me-2"
+                                                        style="background-image: url({{ $detail->product->thumbnail }})"></span>
+                                                    <div class="flex-fill">
+                                                        <div class="font-weight-medium">{{ $detail->product->name }}
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            {{ $detail->product->formatted_price }}
-                                        </td>
-                                        <td>
-                                            {{ $detail->qty }} x
-                                        </td>
-                                        <td>
-                                            {{ $detail->formatted_subtotal }}
-                                        </td>
-                                        <td>
-                                            <a href="{{ route('admin.product.edit', $detail->product->id) }}">Edit</a>
-                                        </td>
-                                    </tr>
+                                            </td>
+                                            <td>
+                                                {{ $detail->product->formatted_price }}
+                                            </td>
+                                            <td>
+                                                {{ $detail->qty }} x
+                                            </td>
+                                            <td>
+                                                {{ $detail->formatted_subtotal }}
+                                            </td>
+                                            <td>
+                                                <a
+                                                    href="{{ route('admin.product.edit', $detail->product->id) }}">Edit</a>
+                                            </td>
+                                        </tr>
                                     @empty
-                                    <tr>
-                                        <td colspan="4">
-                                            Belum ada produk yang ditambahkan.
-                                        </td>
-                                    </tr>
+                                        <tr>
+                                            <td colspan="4">
+                                                Belum ada produk yang ditambahkan.
+                                            </td>
+                                        </tr>
                                     @endforelse
                                 </tbody>
                             </table>
@@ -169,19 +184,24 @@
                             <li class="step-item">
                                 <div class="m-0 h4">{{ $history->status_name['text'] }}</div>
                                 @if ($history->status == 0)
-                                <div class="text-secondary">Order dibuat oleh {{ $transaction->name}}, <br> pada {{ $history->created_at_indonesia }}</div>
+                                    <div class="text-secondary">Order dibuat oleh {{ $transaction->name }}, <br> pada
+                                        {{ $history->created_at_indonesia }}</div>
                                 @endif
                                 @if ($history->status == 1)
-                                <div class="text-secondary">Pembayaran dikonfirmasi oleh admin, <br> pada {{ $history->created_at_indonesia }}</div>
+                                    <div class="text-secondary">Pembayaran dikonfirmasi oleh admin, <br> pada
+                                        {{ $history->created_at_indonesia }}</div>
                                 @endif
                                 @if ($history->status == 2)
-                                <div class="text-secondary">Pesanan sedang diproses oleh admin <br> pada {{ $history->created_at_indonesia }}</div>
+                                    <div class="text-secondary">Pesanan sedang diproses oleh admin <br> pada
+                                        {{ $history->created_at_indonesia }}</div>
                                 @endif
                                 @if ($history->status == 3)
-                                    <div class="text-secondary">Dikirim menggunakan Ekspedisi {{ $transaction->courier->name }} <br> Resi: {{ $history->additional_info}}</div>
+                                    <div class="text-secondary">Dikirim menggunakan Ekspedisi
+                                        {{ $transaction->courier->name }} <br> Resi: {{ $history->additional_info }}
+                                    </div>
                                 @endif
                                 @if ($history->status == 4)
-                                <div class="text-secondary">Pesanan Sudah sampai </div>
+                                    <div class="text-secondary">Pesanan Sudah sampai </div>
                                 @endif
                             </li>
                         @endforeach
@@ -234,12 +254,13 @@
                                 </tr>
                                 <tr>
                                     <td class="fs-4 fw-semibold">Subtotal</td>
-                                    <td class="text-end">{{ 'Rp.'. $transaction->sub_total }}</td>
+                                    <td class="text-end">{{ 'Rp.' . $transaction->sub_total }}</td>
                                 </tr>
                                 <tr>
                                     <td class="fs-4 fw-semibold">Biaya Pengiriman</td>
-                                    <td class="text-end">{{ 'Rp.'. number_format($transaction->delivery_cost, 0, ',',
-                                        ',') }}</td>
+                                    <td class="text-end">
+                                        {{ 'Rp.' . number_format($transaction->delivery_cost, 0, ',', ',') }}
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td class="fs-4 fw-semibold">Diskon Kupon</td>
@@ -247,7 +268,7 @@
                                 </tr>
                                 <tr>
                                     <td class="fs-3 fw-semibold">Total</td>
-                                    <td class="fs-3 fw-semibold text-end">{{ 'Rp.' .$transaction->total_price }}</td>
+                                    <td class="fs-3 fw-semibold text-end">{{ 'Rp.' . $transaction->total_price }}</td>
                                 </tr>
                             </table>
                         </div>
@@ -260,14 +281,16 @@
                                     @if ($transaction->status == 0)
                                         <td class="text-end"> - </td>
                                     @else
-                                    <td class="text-end">{{ $transaction->bank->name }}</td>
+                                        <td class="text-end">{{ $transaction->bank->name }}</td>
                                     @endif
                                 </tr>
                                 <tr>
                                     <td class="fs-4 fw-semibold">Status Pembayaran</td>
                                     <td class="text-end">
-                                        {{ $transaction->status == 0 ? 'Menunggu Pembayaran':'Sudah
-                                        Dibayar' }}
+                                        {{ $transaction->status == 0
+                                            ? 'Menunggu Pembayaran'
+                                            : 'Sudah
+                                                                                                                                                                                                                                                                                                                                                                        Dibayar' }}
                                     </td>
                                 </tr>
                                 <tr>
@@ -308,8 +331,8 @@
             </div>
         </div>
     </div>
-    <div class="modal modal-blur fade" id="modal-input-resi" tabindex="-1" style="display: none;" aria-hidden="true"
-        role="dialog">
+    <div class="modal modal-blur fade" id="modal-input-resi" tabindex="-1" style="display: none;"
+        aria-hidden="true" role="dialog">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <form action="{{ route('admin.transaction.update-resi', $transaction->id) }}" class="modal-content"
                 method="POST">
@@ -322,11 +345,12 @@
                 <div class="modal-body">
                     <div class="mt-3 form-group">
                         <label for="" class="form-label">Nomor Resi</label>
-                        <input name="resi" id="" class="form-control" placeholder="input nomor resi dari ekspedisi">
+                        <input name="resi" id="" class="form-control"
+                            placeholder="input nomor resi dari ekspedisi">
                         @error('resi')
-                        <div class="text-danger">
-                            {{ $message }}
-                        </div>
+                            <div class="text-danger">
+                                {{ $message }}
+                            </div>
                         @enderror
                     </div>
                 </div>
@@ -337,8 +361,8 @@
             </form>
         </div>
     </div>
-    <div class="modal modal-blur fade" id="modal-bukti-transfer" tabindex="-1" style="display: none;" aria-hidden="true"
-        role="dialog">
+    <div class="modal modal-blur fade" id="modal-bukti-transfer" tabindex="-1" style="display: none;"
+        aria-hidden="true" role="dialog">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <form action="{{ route('admin.transaction.update-confirm', $transaction->id) }}" class="modal-content"
                 method="POST">

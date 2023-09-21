@@ -11,21 +11,24 @@
 
                     <div class="nav-toggle-btn a-nav-toggle navSidebar-button">
                         <span class="hamburger">
-                          <span class="top-bun"></span>
-                          <span class="meat"></span>
-                          <span class="bottom-bun"></span>
+                            <span class="top-bun"></span>
+                            <span class="meat"></span>
+                            <span class="bottom-bun"></span>
                         </span>
-                      </div>
+                    </div>
 
                     <!-- Logo -->
-                    <div class="logo"><a href="index.html"><img src="images/logo.png" alt="" title=""></a></div>
+                    <div class="logo"><a href="index.html"><img src="images/logo.png" alt=""
+                                title=""></a></div>
                 </div>
                 <div class="nav-outer clearfix">
 
                     <!-- Main Menu -->
                     <nav class="main-menu show navbar-expand-md">
                         <div class="navbar-header">
-                            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                            <button class="navbar-toggler" type="button" data-toggle="collapse"
+                                data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                                aria-expanded="false" aria-label="Toggle navigation">
                                 <span class="icon-bar"></span>
                                 <span class="icon-bar"></span>
                                 <span class="icon-bar"></span>
@@ -36,8 +39,8 @@
                             <ul class="navigation clearfix">
                                 <li><a href="{{ route('shop.index') }}">Home</a></li>
                                 <li><a href="{{ route('shop.product.index') }}">Produk</a></li>
-                                <li><a href="#">About</a></li>
-                                <li><a href="#">Contact Us</a></li>
+                                <li><a href="{{ route('shop.about') }}">About</a></li>
+                                <li><a href="{{ route('shop.contact') }}">Contact Us</a></li>
                                 {{-- <li class="dropdown"><a href="#">Shop</a>
                                     <ul>
                                         <li><a href="shop.html">Our Products</a></li>
@@ -87,27 +90,27 @@
 
                     <!-- Cart Box -->
                     @auth
-                    <div class="cart-box">
-                        <div class="box-inner">
-                            <a href="{{ route('shop.cart.index') }}" class="icon-box">
-                                <span class="icon flaticon-bag"></span>
-                                <i class="total-cart">{{ auth()->user()->carts ? auth()->user()->carts->count() : 0 }}</i>
-                            </a>
-                            Phone<br>
-                            <a class="phone" href="tel:88-1900-6789-56">{{ $web_setting->tel }}</a>
+                        <div class="cart-box">
+                            <div class="box-inner">
+                                <a href="{{ route('shop.cart.index') }}" class="icon-box">
+                                    <span class="icon flaticon-bag"></span>
+                                    <i class="total-cart">{{ auth()->user()->carts? auth()->user()->carts->count(): 0 }}</i>
+                                </a>
+                                Phone<br>
+                                <a class="phone" href="tel:88-1900-6789-56">{{ $web_setting->tel }}</a>
+                            </div>
                         </div>
-                    </div>
                     @else
-                    <div class="cart-box">
-                        <div class="box-inner">
-                            <a href="{{ route('shop.cart.index') }}" class="icon-box">
-                                <span class="icon flaticon-bag"></span>
-                                <i class="total-cart">0</i>
-                            </a>
-                            Phone<br>
-                            <a class="phone" href="tel:88-1900-6789-56">{{ $web_setting->tel }}</a>
+                        <div class="cart-box">
+                            <div class="box-inner">
+                                <a href="{{ route('shop.cart.index') }}" class="icon-box">
+                                    <span class="icon flaticon-bag"></span>
+                                    <i class="total-cart">0</i>
+                                </a>
+                                Phone<br>
+                                <a class="phone" href="tel:88-1900-6789-56">{{ $web_setting->tel }}</a>
+                            </div>
                         </div>
-                    </div>
 
                     @endauth
                     <!-- End Cart Box -->
@@ -130,7 +133,8 @@
             <div class="d-flex justify-content-between align-items-center">
                 <!-- Logo -->
                 <div class="logo">
-                    <a href="index.html" title=""><img src="images/logo-small.png" alt="" title=""></a>
+                    <a href="index.html" title=""><img src="images/logo-small.png" alt=""
+                            title=""></a>
                 </div>
 
                 <!-- Right Col -->
@@ -155,7 +159,8 @@
         <div class="menu-backdrop"></div>
         <div class="close-btn"><span class="icon flaticon-multiply"></span></div>
         <nav class="menu-box">
-            <div class="nav-logo"><a href="index.html"><img src="images/mobile-logo.png" alt="" title=""></a></div>
+            <div class="nav-logo"><a href="index.html"><img src="images/mobile-logo.png" alt=""
+                        title=""></a></div>
             <!-- Search -->
             <div class="search-box">
                 <form method="post" action="contact.html">
@@ -165,7 +170,8 @@
                     </div>
                 </form>
             </div>
-            <div class="menu-outer"><!--Here Menu Will Come Automatically Via Javascript / Same Menu as in Header--></div>
+            <div class="menu-outer"><!--Here Menu Will Come Automatically Via Javascript / Same Menu as in Header-->
+            </div>
         </nav>
     </div>
     <!-- End Mobile Menu -->
