@@ -13,6 +13,10 @@ class Transaction extends Model implements HasMedia
 
     protected $guarded = [];
 
+    protected $casts = [
+        'status' => 'integer'
+    ];
+
     public function histories ()
     {
         return $this->hasMany(TransactionHistory::class);

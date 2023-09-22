@@ -23,7 +23,6 @@
     <!-- Checkout Section -->
     <section class="checkout-section">
 
-        {{ $errors }}
         <div class="auto-container">
             <div class="clearfix row">
 
@@ -31,7 +30,6 @@
                 <div class="form-column col-lg-8 col-md-12 col-sm-12">
                     <div class="inner-column">
                         <h4>Informasi Pengiriman</h4>
-                        {{-- {{ $errors }} --}}
                         <!-- Shipping Form -->
                         <div class="shipping-form">
                             <form method="POST" action="{{ route('cart.checkout.store') }}">
@@ -261,8 +259,9 @@
                         success: function(res) {
                             console.log(res)
                             delivery_cost = res.data;
-
+                            let new_total = parseInt(total_cart.replace(",", "")) + delivery_cost;
                             $('.delivery-cost').html('Rp. ' + delivery_cost);
+                            $('.grand-total').html('Rp. ' + new_total);
                         }
                     });
                 }

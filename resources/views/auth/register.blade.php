@@ -43,7 +43,6 @@
             </div>
             <div class="card card-md">
                 <div class="card-body">
-                    {{ $errors }}
                     <h2 class="mb-4 text-center h2">Sign Up</h2>
 
                     <form method="POST" action="{{ route('register') }}" novalidate>

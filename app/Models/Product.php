@@ -21,6 +21,7 @@ class Product extends Model implements HasMedia
         'sku',
         'description',
         'price',
+        'discount',
         'stock',
         'weight',
         'status',
@@ -56,6 +57,12 @@ class Product extends Model implements HasMedia
     public function getFormattedPriceAttribute()
     {
         return 'Rp. '.number_format($this->price, 0, ',', ',');
+    }
+
+    public function getFormattedDiscountAttribute()
+    {
+        if (!$this->discount) return '-';
+        return 'Rp. '.number_format($this->discount, 0, ',', ',');
     }
 
     public function transactions()

@@ -118,7 +118,9 @@
                                 <li class="py-3 list-group-item">
                                     <label class="w-100 d-flex">
                                         <input type="radio" name="payment_method" value="{{ $bank->id }}" class="mx-2" required>
-                                        <span class="w-100 d-block fw-semibold"><img src="https://berrybenka.com/berrybenka/desktop/img/atm-bca-logo.jpg" class="me-2">{{ $bank->name }} (Pengecekan Manual)</span>
+                                        <span class="w-100 d-block fw-semibold">
+                                            {{-- <img src="https://berrybenka.com/berrybenka/desktop/img/atm-bca-logo.jpg" class="me-2"> --}}
+                                            {{ $bank->name }} (Pengecekan Manual)</span>
                                     </label>
                                     <div class="mt-3 alert alert-warning panduan-transfer" role="alert" id="bank-{{ $bank->id }}" style="display: none">
                                         <h6 class="mb-2 text-uppercase fs-6 fw-bold"><i class="fa fa-bell me-2"></i>Panduan Pembayaran</h6>

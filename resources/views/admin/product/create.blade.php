@@ -59,12 +59,26 @@
                                     Rp
                                 </span>
                                 <input class="form-control @error('price') is-invalid @enderror" name="price" id="price"
-                                    cols="30" rows="4" placeholder="Harga" value="{{ old('price') }}" required>
+                                    placeholder="Harga" value="{{ old('price') }}" required>
                                 @error('price')
                                 <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
                         </div>
+                        <div class="mb-3 col-md-6">
+                            <label class="form-label">Harga Diskon</label>
+                            <div class="input-group">
+                                <span class="input-group-text">
+                                    Rp
+                                </span>
+                                <input class="form-control @error('discount') is-invalid @enderror" name="discount" id="discount" placeholder="Harga" value="{{ old('discount') }}" required>
+                                @error('discount')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
                         <div class="mb-3 col-md-6">
                             <label class="form-label required">Berat Barang</label>
                             <div class="input-group">
@@ -79,8 +93,6 @@
                                 @enderror
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
                         <div class="mb-3 col-md-6">
                             <label class="form-label">Stok</label>
                             <div>
@@ -91,6 +103,8 @@
                                 @enderror
                             </div>
                         </div>
+                    </div>
+                    <div class="row">
                         <div class="mb-3 col-md-6">
                             <label class="form-label">Kategori</label>
                             <div>

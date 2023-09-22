@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>Bloxic Furniture Business HTML-5 Template | Homepage 01</title>
+<title>Arsenik</title>
 <!-- Stylesheets -->
 @include('layouts.shop._includes.styles')
 @stack('css')

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Transaction;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class TransactionController extends Controller
 {
@@ -63,9 +64,11 @@ class TransactionController extends Controller
         } else if ($validated['confirm'] == 'FAILED') {
             $status = 5;
         }
+
         $transaction->update([
             'status' => $status,
         ]);
+
         $transaction->histories()->create([
             'status' => $status,
         ]);
@@ -102,13 +105,22 @@ class TransactionController extends Controller
 
     public function finishOrder(Transaction $transaction)
     {
-        $transaction->update([
-            'status' => 4
-        ]);
+        DB::transaction(function () use ($transaction) {
+            $transaction->update([
+                'status' => 4
+            ]);
 
-        $transaction->histories()->create([
-            'status' => $transaction->status,
-        ]);
+            $transaction->histories()->create([
+                'status' => $transaction->status,
+            ]);
+
+            foreach ($transaction->transactionDetails as $detail) {
+                $transaction->reviews()->create([
+                    'product_id' => $detail->product_id,
+                    'is_displayed' => 0
+                ]);
+            }
+        });
 
         return redirect()->back()->with('success', 'Pesanan telah berhasil dikonfirmasi');
     }

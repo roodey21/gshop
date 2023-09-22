@@ -26,6 +26,7 @@ Route::get('produk/{product:slug}', [ShopProductController::class, 'show'])->nam
 Route::middleware(['auth', 'role:user'])->group(function () {
     Route::get('/user', [UserHomeController::class, 'account'])->name('user.account');
     Route::get('/user/review',[UserHomeController::class, 'review'])->name('user.review');
+    Route::put('/user/review/{review}/update',[UserHomeController::class, 'reviewUpdate'])->name('user.review.update');
     Route::get('/user/dashboard', [UserHomeController::class, 'index'])->name('user.dashboard');
     Route::get('/user/transaction/{transaction}', [UserHomeController::class, 'show'])->name('user.transaction.show');
     Route::put('/user/transaction/{transaction}/confirm', [TransactionController::class, 'confirm'])->name('user.transaction.confirm');

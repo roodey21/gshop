@@ -52,7 +52,7 @@
 												</div>
 											</td>
 
-											<td class="price">{{ $cart->product->formatted_price }}</td>
+											<td class="price">{{ $cart->product->discount > 0 ? $cart->product->formatted_discount : $cart->product->formatted_price }}</td>
 											<!-- Quantity Box -->
 											<td class="quantity-box">
 												<div class="item-quantity">

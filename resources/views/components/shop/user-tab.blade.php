@@ -55,11 +55,16 @@
         <a href="{{ route('shop.cart.index') }}" class="btn-block btn btn-tab-user {{ (strpos(Route::currentRouteName(), 'shop.cart') === 0) ? 'active' : '' }}">Keranjang</a>
     </div>
     <div class="col-md-3">
-        <a href="{{ route('user.review') }}"  class="btn-block btn btn-tab-user position-relative {{ (strpos(Route::currentRouteName(), 'user.review') === 0) ? 'active' : '' }}">Review <i class="total-review">!</i></a>
+        <a href="{{ route('user.review') }}"  class="btn-block btn btn-tab-user position-relative {{ (strpos(Route::currentRouteName(), 'user.review') === 0) ? 'active' : '' }}">Review Saya
+            @if(auth()->user()->havent_give_review > 0)
+            <i class="total-review">!</i>
+            @endif
+        </a>
     </div>
-    <div class="col-md-3">
-        <button class="btn-block btn btn-tab-user">Data Akun Saya</button>
-    </div>
+    <form action="{{ route('logout') }}" method="POST" class="col-md-3">
+        @csrf
+        <button class="btn-block btn btn-tab-user">Keluar Akun</button>
+    </form>
 </div>
 
 {{-- <div class="py-2 w-100"></div> --}}

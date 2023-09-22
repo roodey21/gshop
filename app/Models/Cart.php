@@ -32,6 +32,7 @@ class Cart extends Model
 
     public function getFormattedTotalAttribute()
     {
-        return 'Rp. '.number_format($this->product->price * $this->qty, 0, ',', ',');
+        $price = $this->product->discount > 0 ? $this->product->discount : $this->product->price;
+        return 'Rp. '.number_format($price * $this->qty, 0, ',', ',');
     }
 }

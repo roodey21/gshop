@@ -22,7 +22,7 @@
                                 <th>Nama Produk</th>
                                 <th>Kategori</th>
                                 <th>Harga</th>
-                                <th>Deskripsi</th>
+                                <th>Harga Diskon</th>
                                 <th class="w-1"></th>
                             </tr>
                         </thead>
@@ -43,10 +43,10 @@
                                     </span>
                                 </td>
                                 <td>
-                                    {{ $product->price }}
+                                    {{ $product->formatted_price }}
                                 </td>
                                 <td>
-                                    {!! Str::limit($product->description, 30, '...') !!}
+                                    {{ $product->formatted_discount }}
                                 </td>
                                 <td>
                                     <a href="{{ route('admin.product.edit', $product->id) }}">Edit</a>

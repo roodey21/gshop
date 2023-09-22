@@ -12,7 +12,8 @@ class ProductReviewController extends Controller
      */
     public function index()
     {
-        //
+        $reviews = ProductReview::latest()->paginate(10);
+        return view('admin.review.index', compact('reviews'));
     }
 
     /**

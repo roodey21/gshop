@@ -11,12 +11,6 @@
                         <div class="ct-dot-item">
                             <span></span>
                         </div>
-                        <div class="ct-dot-item">
-                            <span></span>
-                        </div>
-                        <div class="ct-dot-item">
-                            <span></span>
-                        </div>
                     </div>
                 </div>
                 <!-- End Ct Dot Animated -->
@@ -26,23 +20,7 @@
                     <!-- Content Column -->
                     <div class="content-box">
                         <div class="box-inner">
-                            <div class="vector-icon" style="background-image: url(images/main-slider/vector-1.png)">
-                            </div>
-                            <div class="vector-icon-two" style="background-image: url(images/main-slider/vector-2.png)">
-                            </div>
-                            <div class="vector-icon-three"
-                                style="background-image: url(images/main-slider/vector-3.png)"></div>
-                            <div class="sale-box">
-                                SALE
-                                <span>30<i>% OFF</i></span>
-                            </div>
-                            <div class="title">2022 Collection</div>
-                            <h1>Furniture <br> Collection</h1>
-                            <div class="price">Starting From <span>$560.99</span></div>
-                            <a href="shop-detail.html" class="shop-now">Shop Now</a>
-                            <!-- Arrival Box -->
-                            <a href="shop.html" class="arrival-box">New Arrival</a>
-                            <!-- Arrival Box -->
+                            {!! $setting->description !!}
                         </div>
                     </div>
 
@@ -50,143 +28,15 @@
             </div>
             <!-- End Slide One -->
 
-            <!-- Slide Two -->
-            <div class="slide">
-                <!-- Ct Dot Animated -->
-                <div class="ct-dot-animated">
-                    <div class="ct-dot-container">
-                        <div class="ct-dot-item">
-                            <span></span>
-                        </div>
-                        <div class="ct-dot-item">
-                            <span></span>
-                        </div>
-                        <div class="ct-dot-item">
-                            <span></span>
-                        </div>
-                    </div>
-                </div>
-                <!-- End Ct Dot Animated -->
-                <div class="image-layer" style="background-image: url(images/main-slider/image-1.jpg)"></div>
-                <div class="auto-container">
-
-                    <!-- Content Column -->
-                    <div class="content-box">
-                        <div class="box-inner">
-                            <div class="vector-icon" style="background-image: url(images/main-slider/vector-1.png)">
-                            </div>
-                            <div class="vector-icon-two" style="background-image: url(images/main-slider/vector-2.png)">
-                            </div>
-                            <div class="vector-icon-three"
-                                style="background-image: url(images/main-slider/vector-3.png)"></div>
-                            <div class="sale-box">
-                                SALE
-                                <span>30<i>% OFF</i></span>
-                            </div>
-                            <div class="title">2022 Collection</div>
-                            <h1>Furniture <br> Collection</h1>
-                            <div class="price">Starting From <span>$560.99</span></div>
-                            <a href="shop-detail.html" class="shop-now">Shop Now</a>
-                            <!-- Arrival Box -->
-                            <a href="shop.html" class="arrival-box">New Arrival</a>
-                            <!-- Arrival Box -->
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-            <!-- End Slide Two -->
-
-            <!-- Slide Three -->
-            <div class="slide">
-                <!-- Ct Dot Animated -->
-                <div class="ct-dot-animated">
-                    <div class="ct-dot-container">
-                        <div class="ct-dot-item">
-                            <span></span>
-                        </div>
-                        <div class="ct-dot-item">
-                            <span></span>
-                        </div>
-                        <div class="ct-dot-item">
-                            <span></span>
-                        </div>
-                    </div>
-                </div>
-                <!-- End Ct Dot Animated -->
-                <div class="image-layer" style="background-image: url(images/main-slider/image-1.jpg)"></div>
-                <div class="auto-container">
-
-                    <!-- Content Column -->
-                    <div class="content-box">
-                        <div class="box-inner">
-                            <div class="vector-icon" style="background-image: url(images/main-slider/vector-1.png)">
-                            </div>
-                            <div class="vector-icon-two" style="background-image: url(images/main-slider/vector-2.png)">
-                            </div>
-                            <div class="vector-icon-three"
-                                style="background-image: url(images/main-slider/vector-3.png)"></div>
-                            <div class="sale-box">
-                                SALE
-                                <span>30<i>% OFF</i></span>
-                            </div>
-                            <div class="title">2022 Collection</div>
-                            <h1>Furniture <br> Collection</h1>
-                            <div class="price">Starting From <span>$560.99</span></div>
-                            <a href="shop-detail.html" class="shop-now">Shop Now</a>
-                            <!-- Arrival Box -->
-                            <a href="shop.html" class="arrival-box">New Arrival</a>
-                            <!-- Arrival Box -->
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-            <!-- End Slide Three -->
-
         </div>
-
-        <!-- Hover Box -->
-        <div class="hover-box">
-            <div class="dott"></div>
-            <div class="hover-content">
-                <div class="rating">
-                    <span class="fa fa-star"></span>
-                    <span class="fa fa-star"></span>
-                    <span class="fa fa-star"></span>
-                    <span class="light fa fa-star"></span>
-                    <span class="light fa fa-star"></span>
-                </div>
-                <div class="hover-title">Pot Plastics Color</div>
-                <div class="hover-price">$28.52 - <span>$30.00</span></div>
-            </div>
-        </div>
-        <!-- End Hover Box -->
-
-        <!-- Hover Box -->
-        <div class="hover-box style-two">
-            <div class="dott"></div>
-            <div class="hover-content">
-                <div class="rating">
-                    <span class="fa fa-star"></span>
-                    <span class="fa fa-star"></span>
-                    <span class="fa fa-star"></span>
-                    <span class="light fa fa-star"></span>
-                    <span class="light fa fa-star"></span>
-                </div>
-                <div class="hover-title">Pot Plastics Color</div>
-                <div class="hover-price">$28.52 - <span>$30.00</span></div>
-            </div>
-        </div>
-        <!-- End Hover Box -->
 
     </section>
     <!-- End Main Section -->
 
     <!-- Featured Section -->
     <section class="featured-section">
-        <div class="vector-layer" style="background-image: url(images/icons/vector-1.png)"></div>
-        <div class="vector-layer-two" style="background-image: url(images/icons/feature.png)"></div>
+        <div class="vector-layer" style="background-image: url({{ asset('shop/images/icons/vector-1.png') }})"></div>
+        <div class="vector-layer-two" style="background-image: url({{ asset('shop/images/icons/feature.png') }})"></div>
         <div class="auto-container">
             <div class="inner-container">
                 <div class="row clearfix">

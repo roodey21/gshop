@@ -10,6 +10,7 @@ use App\Models\Courier;
 use App\Models\Province;
 use App\Models\Transaction;
 use App\Models\TransactionHistory;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
 
 class TransactionController extends Controller
@@ -60,7 +61,7 @@ class TransactionController extends Controller
                 'transaction_id' => $transaction->id,
                 'product_id' => $cart->product_id,
                 'qty' => $cart->qty,
-                'price' => $cart->product->price,
+                'price' => $cart->product->discount > 0 ? $cart->product->discount : $cart->product->price,
             ];
             $transaction->transactionDetails()->create($transactionDetail);
             $cart->delete();
@@ -106,13 +107,23 @@ class TransactionController extends Controller
 
     public function confirm(Transaction $transaction)
     {
-        $transaction->update([
-            'status' => 4
-        ]);
+        DB::transaction(function () use ($transaction) {
+            $transaction->update([
+                'status' => 4
+            ]);
 
-        $transaction->histories()->create([
-            'status' => $transaction->status,
-        ]);
+            $transaction->histories()->create([
+                'status' => $transaction->status,
+            ]);
+
+            foreach ($transaction->transactionDetails as $detail)
+            {
+                $transaction->reviews()->create([
+                    'product_id' => $detail->product_id,
+                    'is_displayed' => 0
+                ]);
+            }
+        });
 
         return redirect()->back()->with('success', 'Pesanan telah berhasil dikonfirmasi');
     }

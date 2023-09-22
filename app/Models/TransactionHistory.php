@@ -11,6 +11,10 @@ class TransactionHistory extends Model
     use HasFactory;
     protected $fillable = ['status', 'additional_info'];
 
+    protected $casts = [
+        'status' => 'integer'
+    ];
+
     public function transaction()
     {
         return $this->belongsTo(Transaction::class);

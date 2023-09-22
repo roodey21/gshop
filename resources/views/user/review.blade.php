@@ -59,14 +59,16 @@
                         <div class="card-body">
                             <nav>
                                 <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                                    <button class="nav-link active fs-6" id="nav-home-tab" data-bs-toggle="tab"
-                                        data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home"
+                                    @if($reviews->count() > 0)
+                                    <button class="nav-link active fs-6" id="nav-review-tab" data-bs-toggle="tab"
+                                        data-bs-target="#nav-review" type="button" role="tab" aria-controls="nav-review"
                                         aria-selected="true">
                                         Menunggu Direview
                                     </button>
-                                    <button class="nav-link fs-6" id="nav-profile-tab" data-bs-toggle="tab"
-                                        data-bs-target="#nav-profile" type="button" role="tab"
-                                        aria-controls="nav-profile" aria-selected="false">
+                                    @endif
+                                    <button class="nav-link {{ $reviews->count() > 0 ? '':'active' }} fs-6" id="nav-last-review-tab" data-bs-toggle="tab"
+                                        data-bs-target="#nav-last-review" type="button" role="tab"
+                                        aria-controls="nav-last-review" aria-selected="false">
                                         Riwayat Review Saya
                                     </button>
                                 </div>
@@ -130,51 +132,55 @@
                             </script>
                             @endpush
                             <div class="tab-content" id="nav-tabContent">
-                                <div class="tab-pane fade show active" id="nav-home" role="tabpanel"
-                                    aria-labelledby="nav-home-tab">
+                                @if($reviews->count() > 0)
+                                <div class="tab-pane fade show active" id="nav-review" role="tabpanel"
+                                    aria-labelledby="nav-review-tab">
                                     <div class="row py-4 gy-3">
+                                        @foreach ($reviews as $review)
                                         <div class="col-12">
                                             <div class="card rounded-0 border-thinner review-card">
                                                 <div class="card-header">
                                                     <div class="d-md-flex justify-content-between">
                                                         <h6 class="fs-6">
-                                                            No Invoice : <span class="text-secondary">INV/12332023098</span>
+                                                            No Invoice : <span class="text-secondary">{{ $review->transaction->invoice }}</span>
                                                         </h6>
                                                         <h6 class="fs-6 text-md-end">
-                                                            Tgl transaksi selesai : <span class="text-secondary">20 September 2023</span>
+                                                            Tgl transaksi selesai : <span class="text-secondary">{{ $review->transaction->updated_at }}</span>
                                                         </h6>
                                                     </div>
                                                 </div>
                                                 <div class="card-body">
                                                     <div class="d-md-flex">
-                                                        <img src="{{ asset('shop/images/gallery/1-thumb.jpg') }}"
+                                                        <img src="{{ $review->product->thumbnail }}"
                                                             style="max-height: 100px" alt="" class="img-fluid rounded">
                                                         <div class="ms-md-3 w-100">
-                                                            <h6 class="mb-2">Nama Produk</h6>
-                                                            <form action="" class="">
+                                                            <h6 class="mb-2">{{ $review->product->name }}</h6>
+                                                            <form action="{{ route('user.review.update', $review->id) }}" class="" method="POST">
+                                                                @csrf
+                                                                @method('PUT')
                                                                 <div class="rating mb-2">
                                                                     <div>
-                                                                        <input type="radio" id="star-1" class="d-none">
+                                                                        <input type="radio" name="rating" value="1" id="star-1" class="d-none">
                                                                         <label for="star-1"><span
                                                                                 class="fa fa-star"></span></label>
                                                                     </div>
                                                                     <div>
-                                                                        <input type="radio" id="star-2" class="d-none">
+                                                                        <input type="radio" name="rating" value="2" id="star-2" class="d-none">
                                                                         <label for="star-2"><span
                                                                                 class="fa fa-star"></span></label>
                                                                     </div>
                                                                     <div>
-                                                                        <input type="radio" id="star-3" class="d-none">
+                                                                        <input type="radio" name="rating" value="3" id="star-3" class="d-none">
                                                                         <label for="star-3"><span
                                                                                 class="fa fa-star"></span></label>
                                                                     </div>
                                                                     <div>
-                                                                        <input type="radio" id="star-4" class="d-none">
+                                                                        <input type="radio" name="rating" value="4" id="star-4" class="d-none">
                                                                         <label for="star-4"><span
                                                                                 class="fa fa-star"></span></label>
                                                                     </div>
                                                                     <div>
-                                                                        <input type="radio" id="star-5" class="d-none">
+                                                                        <input type="radio" name="rating" value="5" id="star-5" class="d-none">
                                                                         <label for="star-5"><span
                                                                                 class="fa fa-star"></span></label>
                                                                     </div>
@@ -195,11 +201,62 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        @endforeach
                                     </div>
                                 </div>
-                                <div class="tab-pane fade" id="nav-profile" role="tabpanel"
-                                    aria-labelledby="nav-profile-tab">
-
+                                @endif
+                                <div class="tab-pane fade {{ $reviews->count() > 0 ? '':'show active' }}" id="nav-last-review" role="tabpanel"
+                                    aria-labelledby="nav-last-review-tab">
+                                    <div class="row py-4 gy-3">
+                                        @forelse ($lastReviews as $review)
+                                        <div class="col-12">
+                                            <div class="card rounded-0 border-thinner review-card">
+                                                <div class="card-header">
+                                                    <div class="d-md-flex justify-content-between">
+                                                        <h6 class="fs-6">
+                                                            No Invoice : <span class="text-secondary">{{ $review->transaction->invoice }}</span>
+                                                        </h6>
+                                                        <h6 class="fs-6 text-md-end">
+                                                            Tgl transaksi selesai : <span class="text-secondary">{{ $review->transaction->updated_at }}</span>
+                                                        </h6>
+                                                    </div>
+                                                </div>
+                                                <div class="card-body">
+                                                    <div class="d-md-flex">
+                                                        <img src="{{ $review->product->thumbnail }}"
+                                                            style="max-height: 100px" alt="" class="img-fluid rounded">
+                                                        <div class="ms-md-3 w-100">
+                                                            <h6 class="mb-2">{{ $review->product->name }}</h6>
+                                                            <div class="">
+                                                                <div class="rating mb-2">
+                                                                    @for ($i = 0; $i < 5; $i++)
+                                                                    <div>
+                                                                        {{-- <input type="radio" id="star-1" class="d-none"> --}}
+                                                                        <label for="star-1"><span
+                                                                                class="fa fa-star {{ $i < $review->rating ? 'active':''}}"></span></label>
+                                                                    </div>
+                                                                    @endfor
+                                                                </div>
+                                                                <div class="">
+                                                                    <textarea name="" id="" style="background: white!important"
+                                                                        class="form-control" disabled>{{ $review->review }}</textarea>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        @empty
+                                        <div class="col-12">
+                                            <div class="card rounded-0 border-thinner">
+                                                <div class="card-body">
+                                                    Belum ada produk yang sudah kamu review
+                                                </div>
+                                            </div>
+                                        </div>
+                                        @endforelse
+                                    </div>
                                 </div>
                             </div>
                         </div>

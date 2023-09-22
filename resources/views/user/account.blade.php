@@ -51,6 +51,7 @@
             <x-shop.user-tab />
 
             <div class="row">
+                @if($transactions->filter(fn ($value, $key) => $value->status, [0,1,2,3])->count() > 0)
                 <div class="col-12">
                     <div class="alert alert-info">
                         <div class="d-flex">
@@ -87,6 +88,7 @@
                         </div>
                     </div>
                 </div>
+                @endif
                 <div class="col-md-12">
                     <div class="card border-thinner">
                         <div class="table-responsive">
@@ -101,13 +103,10 @@
                                         <th>Total</th>
                                         <th>Status</th>
                                         <th class="w-1"></th>
-                                        {{-- <th>Keterangan</th>
-                                        <th>Sub Kategori</th>
-                                        <th class="w-1"></th> --}}
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($transactions as $transaction)
+                                    @forelse ($transactions as $transaction)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
                                         <td class="fw-semibold">{{ $transaction->invoice }}</td>
@@ -124,7 +123,13 @@
                                             <a href="{{ route('shop.payment', $transaction->code) }}" class="text-primary">Detail</a>
                                         </td>
                                     </tr>
-                                    @endforeach
+                                    @empty
+                                    <tr>
+                                        <td colspan="8">
+                                            Anda belum melakukan transaksi, semua transaksi anda akan ditampilkan di halaman ini.
+                                        </td>
+                                    </tr>
+                                    @endforelse
                                 </tbody>
                             </table>
                         </div>

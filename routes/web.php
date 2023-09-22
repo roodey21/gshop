@@ -5,6 +5,7 @@ use App\Http\Controllers\BankController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CourierController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ProductReviewController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\TransactionController;
@@ -36,6 +37,7 @@ Route::middleware(['auth', 'role:admin'])->prefix('dashboard')->name('admin.')->
     Route::get('courier/edit', [CourierController::class, 'edit'])->name('courier.edit');
     Route::put('courier/edit', [CourierController::class, 'update'])->name('courier.update');
     Route::resource('setting', SettingController::class);
+    Route::resource('review', ProductReviewController::class);
 });
 
 Route::middleware('auth')->group(function () {

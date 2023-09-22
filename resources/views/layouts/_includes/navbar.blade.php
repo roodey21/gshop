@@ -6,8 +6,8 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <h1 class="navbar-brand navbar-brand-autodark d-none-navbar-horizontal pe-0 pe-md-3">
-                <a href=".">
-                    <img src="./static/logo.svg" width="110" height="32" alt="Logo-Toko" class="navbar-brand-image">
+                <a href="{{ route('shop.index') }}">
+                    <img src="{{ asset('shop/images/logo.png') }}" height="32" alt="Arsenik" class="navbar-brand-image">
                 </a>
             </h1>
             <div class="flex-row navbar-nav order-md-last">
@@ -168,9 +168,9 @@
                         </div>
                     </a>
                     <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                        <a href="./profile.html" class="dropdown-item">Profile</a>
-                        <div class="dropdown-divider"></div>
-                        <a href="./settings.html" class="dropdown-item">Settings</a>
+                        {{-- <a href="./profile.html" class="dropdown-item">Profile</a> --}}
+                        {{-- <div class="dropdown-divider"></div> --}}
+                        <a href="{{ route('admin.setting.index') }}" class="dropdown-item">Settings</a>
                         <form action="{{ route('logout') }}" method="POST">
                             @csrf
                             <button  class="dropdown-item">Logout</button>
@@ -230,7 +230,7 @@
                                             Data Produk
                                         </a>
                                         <a class="dropdown-item" href="./blank.html">
-                                            Blank page
+                                            Review Produk
                                         </a>
                                     </div>
                                 </div>
@@ -297,23 +297,6 @@
                                 </span>
                                 <span class="nav-link-title">
                                     Web Setting
-                                </span>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="./form-elements.html">
-                                <span class="nav-link-icon d-md-none d-lg-inline-block">
-                                    <!-- Download SVG icon from http://tabler-icons.io/i/checkbox -->
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
-                                        viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
-                                        stroke-linecap="round" stroke-linejoin="round">
-                                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                        <path d="M9 11l3 3l8 -8" />
-                                        <path d="M20 12v6a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h9" />
-                                    </svg>
-                                </span>
-                                <span class="nav-link-title">
-                                    Form elements
                                 </span>
                             </a>
                         </li>

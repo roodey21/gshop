@@ -22,6 +22,7 @@
 
     <div class="row row-cards">
         <div class="col-12">
+            @if(in_array($transaction->status, [0,1,2]))
             <div class="alert alert-info alert-important" role="alert">
                 <div class="d-flex">
                     <div>
@@ -50,6 +51,7 @@
                     @endif
                 </div>
             </div>
+            @endif
             <div class="card">
                 <div class="justify-content-between card-header d-flex">
                     <div>

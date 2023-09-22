@@ -83,7 +83,7 @@
                                                     href="{{ route('shop.product.show', $product->slug) }}">{{ $product->name }}</a>
                                             </h6>
                                             <div class="d-flex justify-content-between align-items-center">
-                                                <div class="price">{{ $product->formatted_price }}</div>
+                                                <div class="price"><span>{{ $product->discount ? $product->formatted_price : '' }}</span>{{ $product->discount ? $product->formatted_discount : $product->formatted_price }}</div>
                                                 <!-- Quantity Box -->
                                                 <div class="quantity-box">
                                                     <div class="item-quantity">
@@ -126,7 +126,7 @@
                                 <!-- Category List -->
                                 <ul class="category-list">
                                     @foreach ($categories as $category)
-                                        <li><a href="#">{{ $category->name }} <span>(0)</span></a></li>
+                                        <li><a href="#">{{ $category->name }} <span>({{ $category->products ? $category->products->count() : 0 }})</span></a></li>
                                     @endforeach
                                 </ul>
 
