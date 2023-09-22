@@ -1,133 +1,140 @@
 <x-shop-layout>
 
-	<!-- Page Title -->
+    <!-- Page Title -->
     <section class="page-title">
         <div class="auto-container">
-			<h2>Produk Toko</h2>
-			<ul class="clearfix bread-crumb">
-				<li><a href="index.html">Home</a></li>
-				<li>Produk</li>
-				<li>Produk Toko</li>
-			</ul>
+            <h2>Produk Toko</h2>
+            <ul class="clearfix bread-crumb">
+                <li><a href="index.html">Home</a></li>
+                <li>Produk</li>
+                <li>Produk Toko</li>
+            </ul>
         </div>
     </section>
     <!-- End Page Title -->
 
-	<!-- Sidebar Page Container -->
+    <!-- Sidebar Page Container -->
     <div class="sidebar-page-container">
-    	<div class="auto-container">
-        	<div class="clearfix row">
+        <div class="auto-container">
+            <div class="clearfix row">
 
-				<!-- Content Side -->
+                <!-- Content Side -->
                 <div class="content-side col-lg-9 col-md-12 col-sm-12">
-					<!-- Filter Box -->
-					<div class="filter-box">
-						<div class="flex-wrap d-flex justify-content-between align-items-center">
-							<!-- Left Box -->
-							<div class="left-box d-flex align-items-center">
-								{{-- <div class="results">Showing 1–12 of 54 results</div> --}}
-                                <div class="results">Menampilkan produk {{ $products->firstItem() .' - '. $products->lastItem() }} dari {{ $products->total() }} produk</div>
-							</div>
-							<!-- Right Box -->
-							<div class="right-box d-flex">
-								<div class="form-group">
-									<select name="currency" class="custom-select-box">
-										<option>Produk Terbaru</option>
-										<option>Harga Terendah</option>
-										<option>Harga Tertinggi</option>
-									</select>
-								</div>
-							</div>
-						</div>
-					</div>
-					<!-- End Filter Box -->
-
-					<div class="shops-outer">
-						<div class="clearfix row">
-
-                            @forelse($products as $product)
-							<!-- Shop Item -->
-							<div class="shop-item col-lg-4 col-md-4 col-sm-12">
-								<div class="inner-box">
-									<div class="image">
-										<a href="{{ route('shop.product.show', $product->slug) }}"><img src="{{ $product->thumbnail }}" alt="" /></a>
-										<div class="options-box">
-											<ul class="option-list">
-												<li><a class="flaticon-resize" href="shop-detail.html"></a></li>
-												<li><a class="flaticon-heart" href="shop-detail.html"></a></li>
-												<li>
-                                                    <form action="{{ route('shop.cart.add', $product->slug) }}" method="POST">
-                                                        @csrf
-                                                        <input type="hidden" name="qty" value="1">
-                                                        <button style="background: transparent">
-                                                            <a class="flaticon-shopping-cart-2"></a>
-                                                        </button>
-                                                    </form>
-                                                </li>
-											</ul>
-										</div>
-									</div>
-									<div class="lower-content">
-										<div class="rating">
-											<span class="fa fa-star"></span>
-											<span class="fa fa-star"></span>
-											<span class="fa fa-star"></span>
-											<span class="fa fa-star"></span>
-											<span class="light fa fa-star"></span>
-										</div>
-										<h6><a href="{{ route('shop.product.show', $product->slug) }}">{{ $product->name }}</a></h6>
-										<div class="d-flex justify-content-between align-items-center">
-											<div class="price">{{ $product->formatted_price }}</div>
-											<!-- Quantity Box -->
-											<div class="quantity-box">
-												<div class="item-quantity">
-													<input class="qty-spinner" type="text" value="1" name="quantity">
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-                            @empty
-                            <div class="col-12">
-                                <div class="alert alert-info">
-                                    Belum ada produk.
+                    <!-- Filter Box -->
+                    <div class="filter-box">
+                        <div class="flex-wrap d-flex justify-content-between align-items-center">
+                            <!-- Left Box -->
+                            <div class="left-box d-flex align-items-center">
+                                {{-- <div class="results">Showing 1–12 of 54 results</div> --}}
+                                <div class="results">Menampilkan produk
+                                    {{ $products->firstItem() . ' - ' . $products->lastItem() }} dari
+                                    {{ $products->total() }} produk</div>
+                            </div>
+                            <!-- Right Box -->
+                            <div class="right-box d-flex">
+                                <div class="form-group">
+                                    <select name="currency" class="custom-select-box">
+                                        <option>Produk Terbaru</option>
+                                        <option>Harga Terendah</option>
+                                        <option>Harga Tertinggi</option>
+                                    </select>
                                 </div>
                             </div>
+                        </div>
+                    </div>
+                    <!-- End Filter Box -->
+
+                    <div class="shops-outer">
+                        <div class="clearfix row">
+
+                            @forelse($products as $product)
+                                <!-- Shop Item -->
+                                <div class="shop-item col-lg-4 col-md-4 col-sm-12">
+                                    <div class="inner-box">
+                                        <div class="image">
+                                            <a href="{{ route('shop.product.show', $product->slug) }}"><img
+                                                    src="{{ $product->thumbnail }}" alt="" /></a>
+                                            <div class="options-box">
+                                                <ul class="option-list">
+                                                    <li><a class="flaticon-resize" href="shop-detail.html"></a></li>
+                                                    <li><a class="flaticon-heart" href="shop-detail.html"></a></li>
+                                                    <li>
+                                                        <form action="{{ route('shop.cart.add', $product->slug) }}"
+                                                            method="POST">
+                                                            @csrf
+                                                            <input type="hidden" name="qty" value="1">
+                                                            <button style="background: transparent">
+                                                                <a class="flaticon-shopping-cart-2"></a>
+                                                            </button>
+                                                        </form>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="lower-content">
+                                            <div class="rating">
+                                                <span class="fa fa-star"></span>
+                                                <span class="fa fa-star"></span>
+                                                <span class="fa fa-star"></span>
+                                                <span class="fa fa-star"></span>
+                                                <span class="light fa fa-star"></span>
+                                            </div>
+                                            <h6><a
+                                                    href="{{ route('shop.product.show', $product->slug) }}">{{ $product->name }}</a>
+                                            </h6>
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                <div class="price">{{ $product->formatted_price }}</div>
+                                                <!-- Quantity Box -->
+                                                <div class="quantity-box">
+                                                    <div class="item-quantity">
+                                                        <input class="qty-spinner" type="text" min="1"
+                                                            value="1" name="qty">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            @empty
+                                <div class="col-12">
+                                    <div class="alert alert-info">
+                                        Belum ada produk.
+                                    </div>
+                                </div>
                             @endforelse
-						</div>
+                        </div>
 
-						<!-- Styled Pagination -->
-						{{ $products->links('vendor.pagination.shop') }}
-						<!-- End Styled Pagination -->
+                        <!-- Styled Pagination -->
+                        {{ $products->links('vendor.pagination.shop') }}
+                        <!-- End Styled Pagination -->
 
-					</div>
+                    </div>
 
-				</div>
+                </div>
 
-				<!-- Sidebar Side -->
+                <!-- Sidebar Side -->
                 <div class="sidebar-side col-lg-3 col-md-12 col-sm-12">
-                	<aside class="sidebar sticky-top">
+                    <aside class="sidebar sticky-top">
 
-						<!-- Category Widget -->
-						<div class="sidebar-widget category-widget">
-							<div class="widget-content">
-								<!-- Sidebar Title -->
-								<div class="sidebar-title">
-									<h6>Kategori Produk</h6>
-								</div>
-								<!-- Category List -->
-								<ul class="category-list">
+                        <!-- Category Widget -->
+                        <div class="sidebar-widget category-widget">
+                            <div class="widget-content">
+                                <!-- Sidebar Title -->
+                                <div class="sidebar-title">
+                                    <h6>Kategori Produk</h6>
+                                </div>
+                                <!-- Category List -->
+                                <ul class="category-list">
                                     @foreach ($categories as $category)
-									<li><a href="#">{{ $category->name }} <span>(0)</span></a></li>
+                                        <li><a href="#">{{ $category->name }} <span>(0)</span></a></li>
                                     @endforeach
-								</ul>
+                                </ul>
 
-							</div>
-						</div>
+                            </div>
+                        </div>
 
-						<!-- Colors Widget -->
-						{{-- <div class="sidebar-widget colors-widget">
+                        <!-- Colors Widget -->
+                        {{-- <div class="sidebar-widget colors-widget">
 							<div class="widget-content">
 								<!-- Sidebar Title -->
 								<div class="sidebar-title">
@@ -144,7 +151,7 @@
 							</div>
 						</div> --}}
 
-						{{-- <!-- Brands Widget -->
+                        {{-- <!-- Brands Widget -->
 						<div class="sidebar-widget brands-widget">
 							<div class="widget-content">
 								<!-- Sidebar Title -->
@@ -204,8 +211,8 @@
 							</div>
 						</div> --}}
 
-						<!-- Trending Widget -->
-						{{-- <div class="sidebar-widget trending-widget">
+                        <!-- Trending Widget -->
+                        {{-- <div class="sidebar-widget trending-widget">
 							<div class="widget-content">
 								<div class="content">
 									<div class="vector-icon" style="background-image: url(images/icons/vector-3.png)"></div>
@@ -219,7 +226,7 @@
 							</div>
 						</div> --}}
 
-						{{-- <!-- Tags Widget -->
+                        {{-- <!-- Tags Widget -->
 						<div class="sidebar-widget-two tags-widget">
 							<div class="widget-content">
 								<!-- Sidebar Title -->
@@ -239,14 +246,14 @@
 							</div>
 						</div> --}}
 
-					</aside>
-				</div>
+                    </aside>
+                </div>
 
-			</div>
-		</div>
-	</div>
+            </div>
+        </div>
+    </div>
 
-	<!-- Gallery Section -->
-	<x-shop.gallery />
-	<!-- End Gallery Section -->
+    <!-- Gallery Section -->
+    <x-shop.gallery />
+    <!-- End Gallery Section -->
 </x-shop-layout>
