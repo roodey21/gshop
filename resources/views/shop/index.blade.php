@@ -14,7 +14,7 @@
                     </div>
                 </div>
                 <!-- End Ct Dot Animated -->
-                <div class="image-layer" style="background-image: url(images/main-slider/image-1.jpg)"></div>
+                <div class="image-layer" style="background-image: url({{ asset('shop/images/main-slider.jpg') }})"></div>
                 <div class="auto-container">
 
                     <!-- Content Column -->
@@ -221,7 +221,7 @@
     <!-- End Sale Section -->
 
     <!-- Products Section Two -->
-    <section class="products-section-two">
+    {{-- <section class="products-section-two">
         <div class="bottom-white-border"></div>
         <div class="auto-container">
             <!-- Sec Title -->
@@ -592,9 +592,59 @@
 
             </div>
         </div>
-    </section>
+    </section> --}}
     <!-- End Products Section Two -->
 
+    <!-- Testimonial Section -->
+	<section class="testimonial-section mt-md-4">
+		<div class="pattern-layer" style="background-image: url({{ asset('shop/images/background/pattern-3.png') }})"></div>
+		<div class="auto-container">
+			<div class="inner-container">
+				<div class="pattern-layer-two" style="background-image: url({{ asset('shop/images/background/pattern-4.png') }})"></div>
+				<div class="vector-layer" style="background-image: url({{ asset('shop/images/background/pattern-2.png') }})"></div>
+				<div class="single-item-carousel owl-carousel owl-theme">
+
+                    @foreach ($lastReviews as $review)
+
+					<!-- Testimonial Block -->
+					<div class="testimonial-block">
+						<div class="inner-box">
+							<div class="row clearfix">
+								<!-- Image Column -->
+								<div class="image-column col-lg-4 col-md-12 col-sm-12">
+									<div class="inner-column">
+										<div class="arrow-layer" style="background-image: url({{ asset('shop/images/icons/arrow-2.png') }})"></div>
+										<div class="image">
+											<img src="{{ asset('shop/images/resource/author-2.jpg') }}" alt="" />
+											<!-- Social Box -->
+											<ul class="social-box">
+												<h6>{{ $review->transaction->name }}</h6>
+											</ul>
+										</div>
+									</div>
+								</div>
+								<!-- Content Column -->
+								<div class="content-column col-lg-8 col-md-12 col-sm-12">
+									<div class="inner-column">
+										<div class="rating">
+                                            @for ($i = 0; $i < $review->rating; $i++)
+                                            <span class="fa fa-star"></span>
+                                            @endfor
+										</div>
+										<div class="text">{{ $review->review }}</div>
+										<div class="quote-icon flaticon-quote"></div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+                    @endforeach
+
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- End Testimonial Section -->
     <!-- Counter Section -->
     {{-- <section class="counter-section">
 		<div class="auto-container">
