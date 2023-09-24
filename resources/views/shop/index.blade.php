@@ -39,7 +39,7 @@
         <div class="vector-layer-two" style="background-image: url({{ asset('shop/images/icons/feature.png') }})"></div>
         <div class="auto-container">
             <div class="inner-container">
-                <div class="row clearfix">
+                <div class="clearfix row">
 
                     <!-- Feature Block -->
                     <div class="feature-block col-xl-3 col-lg-6 col-md-6 col-sm-12">
@@ -108,17 +108,15 @@
                             <div class="image">
                                 <a href="#"><img src="{{ $product->thumbnail }}" alt="" /></a>
                                 <span class="tag flaticon-heart"></span>
-                                <div class="cart-box text-center">
+                                <div class="text-center cart-box">
                                     <a class="cart" onclick="$(this).closest('form').submit()">Add to Cart</a>
                                 </div>
                             </div>
                             <div class="lower-content">
                                 <div class="rating">
-                                    <span class="fa fa-star"></span>
-                                    <span class="fa fa-star"></span>
-                                    <span class="fa fa-star"></span>
-                                    <span class="fa fa-star"></span>
-                                    <span class="fa fa-star"></span>
+                                    @for ($i = 0; $i < 5; $i++)
+                                        <span class="{{ $i > $product->average_rating ? 'light':'' }} fa fa-star"></span>
+                                    @endfor
                                     {{-- <span class="light fa fa-star"></span> --}}
                                 </div>
                                 <h6><a href="{{ route('shop.product.show', $product->slug) }}">{{ $product->name }}</a>
@@ -149,22 +147,22 @@
     <section class="brand-section">
         <div class="outer-container">
             <div class="animation_mode">
-                <h1>Design. <span>Brand</span>. <strong>Quality</strong></h1>
-                <img src="shop/images/icons/icon-1.png" alt="" />
-                <img src="shop/images/icons/feature.png" alt="" />
-                <img src="shop/images/icons/icon-2.png" alt="" />
-                <h1>Design. <span>Brand</span>. <strong>Quality</strong></h1>
-                <img src="shop/images/icons/icon-1.png" alt="" />
-                <img src="shop/images/icons/feature.png" alt="" />
-                <img src="shop/images/icons/icon-2.png" alt="" />
-                <h1>Design. <span>Brand</span>. <strong>Quality</strong></h1>
-                <img src="shop/images/icons/icon-1.png" alt="" />
-                <img src="shop/images/icons/feature.png" alt="" />
-                <img src="shop/images/icons/icon-2.png" alt="" />
-                <h1>Design. <span>Brand</span>. <strong>Quality</strong></h1>
-                <img src="shop/images/icons/icon-1.png" alt="" />
-                <img src="shop/images/icons/feature.png" alt="" />
-                <img src="shop/images/icons/icon-2.png" alt="" />
+                <h1>Design Unik</span>. <strong>Kualitas Menarik</strong></h1>
+                <img src="{{ asset('shop/images/icons/icon-1.png') }}" alt="" />
+                <img src="{{ asset('shop/images/icons/gerabah-senik.png') }}" alt="" width="115px" height="115px"/>
+                <img src="{{ asset('shop/images/icons/icon-2.png') }}" alt="" />
+                <h1>Design Unik</span>. <strong>Kualitas Menarik</strong></h1>
+                <img src="{{ asset('shop/images/icons/icon-1.png') }}" alt="" />
+                <img src="{{ asset('shop/images/icons/gerabah-senik.png') }}" alt="" width="115px" height="115px"/>
+                <img src="{{ asset('shop/images/icons/icon-2.png') }}" alt="" />
+                <h1>Design Unik</span>. <strong>Kualitas Menarik</strong></h1>
+                <img src="{{ asset('shop/images/icons/icon-1.png') }}" alt="" />
+                <img src="{{ asset('shop/images/icons/gerabah-senik.png') }}" alt="" width="115px" height="115px"/>
+                <img src="{{ asset('shop/images/icons/icon-2.png') }}" alt="" />
+                <h1>Design Unik</span>. <strong>Kualitas Menarik</strong></h1>
+                <img src="{{ asset('shop/images/icons/icon-1.png') }}" alt="" />
+                <img src="{{ asset('shop/images/icons/gerabah-senik.png') }}" alt="" width="115px" height="115px"/>
+                <img src="{{ asset('shop/images/icons/icon-2.png') }}" alt="" />
             </div>
         </div>
     </section>
@@ -173,7 +171,7 @@
     <!-- Sale Section -->
     {{-- <section class="sale-section">
 		<div class="auto-container">
-			<div class="row clearfix">
+			<div class="clearfix row">
 
 				<!-- Sale Block -->
 				<div class="sale-block col-xl-6 col-lg-6 col-md-12 col-sm-12">
@@ -233,11 +231,11 @@
 
                     <!-- Slide -->
                     <div class="slide">
-                        <div class="row clearfix">
+                        <div class="clearfix row">
 
                             <!-- Product Block Four -->
                             <div class="product-block-four col-lg-3 col-md-6 col-sm-6">
-                                <div class="inner-box d-flex justify-content-between align-items-center flex-wrap">
+                                <div class="flex-wrap inner-box d-flex justify-content-between align-items-center">
                                     <div class="image">
                                         <span class="number">01</span>
                                         <img src="images/resource/product-1.png" alt="" />
@@ -251,7 +249,7 @@
 
                             <!-- Product Block Four -->
                             <div class="product-block-four col-lg-3 col-md-6 col-sm-6">
-                                <div class="inner-box d-flex justify-content-between align-items-center flex-wrap">
+                                <div class="flex-wrap inner-box d-flex justify-content-between align-items-center">
                                     <div class="image">
                                         <span class="number">02</span>
                                         <img src="images/resource/product-2.png" alt="" />
@@ -265,7 +263,7 @@
 
                             <!-- Product Block Four -->
                             <div class="product-block-four col-lg-3 col-md-6 col-sm-6">
-                                <div class="inner-box d-flex justify-content-between align-items-center flex-wrap">
+                                <div class="flex-wrap inner-box d-flex justify-content-between align-items-center">
                                     <div class="image">
                                         <span class="number">03</span>
                                         <img src="images/resource/product-3.png" alt="" />
@@ -279,7 +277,7 @@
 
                             <!-- Product Block Four -->
                             <div class="product-block-four col-lg-3 col-md-6 col-sm-6">
-                                <div class="inner-box d-flex justify-content-between align-items-center flex-wrap">
+                                <div class="flex-wrap inner-box d-flex justify-content-between align-items-center">
                                     <div class="image">
                                         <span class="number">04</span>
                                         <img src="images/resource/product-4.png" alt="" />
@@ -293,7 +291,7 @@
 
                             <!-- Product Block Four -->
                             <div class="product-block-four col-lg-3 col-md-6 col-sm-6">
-                                <div class="inner-box d-flex justify-content-between align-items-center flex-wrap">
+                                <div class="flex-wrap inner-box d-flex justify-content-between align-items-center">
                                     <div class="image">
                                         <span class="number">05</span>
                                         <img src="images/resource/product-5.png" alt="" />
@@ -307,7 +305,7 @@
 
                             <!-- Product Block Four -->
                             <div class="product-block-four col-lg-3 col-md-6 col-sm-6">
-                                <div class="inner-box d-flex justify-content-between align-items-center flex-wrap">
+                                <div class="flex-wrap inner-box d-flex justify-content-between align-items-center">
                                     <div class="image">
                                         <span class="number">06</span>
                                         <img src="images/resource/product-6.png" alt="" />
@@ -321,7 +319,7 @@
 
                             <!-- Product Block Four -->
                             <div class="product-block-four col-lg-3 col-md-6 col-sm-6">
-                                <div class="inner-box d-flex justify-content-between align-items-center flex-wrap">
+                                <div class="flex-wrap inner-box d-flex justify-content-between align-items-center">
                                     <div class="image">
                                         <span class="number">07</span>
                                         <img src="images/resource/product-7.png" alt="" />
@@ -335,7 +333,7 @@
 
                             <!-- Product Block Four -->
                             <div class="product-block-four col-lg-3 col-md-6 col-sm-6">
-                                <div class="inner-box d-flex justify-content-between align-items-center flex-wrap">
+                                <div class="flex-wrap inner-box d-flex justify-content-between align-items-center">
                                     <div class="image">
                                         <span class="number">08</span>
                                         <img src="images/resource/product-8.png" alt="" />
@@ -352,11 +350,11 @@
 
                     <!-- Slide -->
                     <div class="slide">
-                        <div class="row clearfix">
+                        <div class="clearfix row">
 
                             <!-- Product Block Four -->
                             <div class="product-block-four col-lg-3 col-md-6 col-sm-6">
-                                <div class="inner-box d-flex justify-content-between align-items-center flex-wrap">
+                                <div class="flex-wrap inner-box d-flex justify-content-between align-items-center">
                                     <div class="image">
                                         <span class="number">01</span>
                                         <img src="images/resource/product-1.png" alt="" />
@@ -370,7 +368,7 @@
 
                             <!-- Product Block Four -->
                             <div class="product-block-four col-lg-3 col-md-6 col-sm-6">
-                                <div class="inner-box d-flex justify-content-between align-items-center flex-wrap">
+                                <div class="flex-wrap inner-box d-flex justify-content-between align-items-center">
                                     <div class="image">
                                         <span class="number">02</span>
                                         <img src="images/resource/product-2.png" alt="" />
@@ -384,7 +382,7 @@
 
                             <!-- Product Block Four -->
                             <div class="product-block-four col-lg-3 col-md-6 col-sm-6">
-                                <div class="inner-box d-flex justify-content-between align-items-center flex-wrap">
+                                <div class="flex-wrap inner-box d-flex justify-content-between align-items-center">
                                     <div class="image">
                                         <span class="number">03</span>
                                         <img src="images/resource/product-3.png" alt="" />
@@ -398,7 +396,7 @@
 
                             <!-- Product Block Four -->
                             <div class="product-block-four col-lg-3 col-md-6 col-sm-6">
-                                <div class="inner-box d-flex justify-content-between align-items-center flex-wrap">
+                                <div class="flex-wrap inner-box d-flex justify-content-between align-items-center">
                                     <div class="image">
                                         <span class="number">04</span>
                                         <img src="images/resource/product-4.png" alt="" />
@@ -412,7 +410,7 @@
 
                             <!-- Product Block Four -->
                             <div class="product-block-four col-lg-3 col-md-6 col-sm-6">
-                                <div class="inner-box d-flex justify-content-between align-items-center flex-wrap">
+                                <div class="flex-wrap inner-box d-flex justify-content-between align-items-center">
                                     <div class="image">
                                         <span class="number">05</span>
                                         <img src="images/resource/product-5.png" alt="" />
@@ -426,7 +424,7 @@
 
                             <!-- Product Block Four -->
                             <div class="product-block-four col-lg-3 col-md-6 col-sm-6">
-                                <div class="inner-box d-flex justify-content-between align-items-center flex-wrap">
+                                <div class="flex-wrap inner-box d-flex justify-content-between align-items-center">
                                     <div class="image">
                                         <span class="number">06</span>
                                         <img src="images/resource/product-6.png" alt="" />
@@ -440,7 +438,7 @@
 
                             <!-- Product Block Four -->
                             <div class="product-block-four col-lg-3 col-md-6 col-sm-6">
-                                <div class="inner-box d-flex justify-content-between align-items-center flex-wrap">
+                                <div class="flex-wrap inner-box d-flex justify-content-between align-items-center">
                                     <div class="image">
                                         <span class="number">07</span>
                                         <img src="images/resource/product-7.png" alt="" />
@@ -454,7 +452,7 @@
 
                             <!-- Product Block Four -->
                             <div class="product-block-four col-lg-3 col-md-6 col-sm-6">
-                                <div class="inner-box d-flex justify-content-between align-items-center flex-wrap">
+                                <div class="flex-wrap inner-box d-flex justify-content-between align-items-center">
                                     <div class="image">
                                         <span class="number">08</span>
                                         <img src="images/resource/product-8.png" alt="" />
@@ -471,11 +469,11 @@
 
                     <!-- Slide -->
                     <div class="slide">
-                        <div class="row clearfix">
+                        <div class="clearfix row">
 
                             <!-- Product Block Four -->
                             <div class="product-block-four col-lg-3 col-md-6 col-sm-6">
-                                <div class="inner-box d-flex justify-content-between align-items-center flex-wrap">
+                                <div class="flex-wrap inner-box d-flex justify-content-between align-items-center">
                                     <div class="image">
                                         <span class="number">01</span>
                                         <img src="images/resource/product-1.png" alt="" />
@@ -489,7 +487,7 @@
 
                             <!-- Product Block Four -->
                             <div class="product-block-four col-lg-3 col-md-6 col-sm-6">
-                                <div class="inner-box d-flex justify-content-between align-items-center flex-wrap">
+                                <div class="flex-wrap inner-box d-flex justify-content-between align-items-center">
                                     <div class="image">
                                         <span class="number">02</span>
                                         <img src="images/resource/product-2.png" alt="" />
@@ -503,7 +501,7 @@
 
                             <!-- Product Block Four -->
                             <div class="product-block-four col-lg-3 col-md-6 col-sm-6">
-                                <div class="inner-box d-flex justify-content-between align-items-center flex-wrap">
+                                <div class="flex-wrap inner-box d-flex justify-content-between align-items-center">
                                     <div class="image">
                                         <span class="number">03</span>
                                         <img src="images/resource/product-3.png" alt="" />
@@ -517,7 +515,7 @@
 
                             <!-- Product Block Four -->
                             <div class="product-block-four col-lg-3 col-md-6 col-sm-6">
-                                <div class="inner-box d-flex justify-content-between align-items-center flex-wrap">
+                                <div class="flex-wrap inner-box d-flex justify-content-between align-items-center">
                                     <div class="image">
                                         <span class="number">04</span>
                                         <img src="images/resource/product-4.png" alt="" />
@@ -531,7 +529,7 @@
 
                             <!-- Product Block Four -->
                             <div class="product-block-four col-lg-3 col-md-6 col-sm-6">
-                                <div class="inner-box d-flex justify-content-between align-items-center flex-wrap">
+                                <div class="flex-wrap inner-box d-flex justify-content-between align-items-center">
                                     <div class="image">
                                         <span class="number">05</span>
                                         <img src="images/resource/product-5.png" alt="" />
@@ -545,7 +543,7 @@
 
                             <!-- Product Block Four -->
                             <div class="product-block-four col-lg-3 col-md-6 col-sm-6">
-                                <div class="inner-box d-flex justify-content-between align-items-center flex-wrap">
+                                <div class="flex-wrap inner-box d-flex justify-content-between align-items-center">
                                     <div class="image">
                                         <span class="number">06</span>
                                         <img src="images/resource/product-6.png" alt="" />
@@ -559,7 +557,7 @@
 
                             <!-- Product Block Four -->
                             <div class="product-block-four col-lg-3 col-md-6 col-sm-6">
-                                <div class="inner-box d-flex justify-content-between align-items-center flex-wrap">
+                                <div class="flex-wrap inner-box d-flex justify-content-between align-items-center">
                                     <div class="image">
                                         <span class="number">07</span>
                                         <img src="images/resource/product-7.png" alt="" />
@@ -573,7 +571,7 @@
 
                             <!-- Product Block Four -->
                             <div class="product-block-four col-lg-3 col-md-6 col-sm-6">
-                                <div class="inner-box d-flex justify-content-between align-items-center flex-wrap">
+                                <div class="flex-wrap inner-box d-flex justify-content-between align-items-center">
                                     <div class="image">
                                         <span class="number">08</span>
                                         <img src="images/resource/product-8.png" alt="" />
@@ -609,13 +607,13 @@
 					<!-- Testimonial Block -->
 					<div class="testimonial-block">
 						<div class="inner-box">
-							<div class="row clearfix">
+							<div class="clearfix row">
 								<!-- Image Column -->
 								<div class="image-column col-lg-4 col-md-12 col-sm-12">
 									<div class="inner-column">
 										<div class="arrow-layer" style="background-image: url({{ asset('shop/images/icons/arrow-2.png') }})"></div>
 										<div class="image">
-											<img src="{{ asset('shop/images/resource/author-2.jpg') }}" alt="" />
+											<img src="{{ asset('shop/images/avatar.png') }}" alt="" />
 											<!-- Social Box -->
 											<ul class="social-box">
 												<h6>{{ $review->transaction->name }}</h6>
@@ -648,7 +646,7 @@
     <!-- Counter Section -->
     {{-- <section class="counter-section">
 		<div class="auto-container">
-			<div class="inner-container d-flex justify-content-between align-items-center flex-wrap">
+			<div class="flex-wrap inner-container d-flex justify-content-between align-items-center">
 
 				<!-- Shipping Box -->
 				<div class="shipping-box">
@@ -665,7 +663,7 @@
 
 				<!-- Counter Boxed -->
 				<div class="counter-boxed">
-					<div class="row clearfix">
+					<div class="clearfix row">
 
 						<!-- Counter Column -->
 						<div class="counter-block col-lg-6 col-md-6 col-sm-6">
@@ -698,7 +696,7 @@
 			<div class="inner-container">
 				<div class="pattern-layer" style="background-image: url(shop/images/icons/pattern-1.png)"></div>
 				<div class="shape-layer" style="background-image: url(shop/images/background/pattern-1.png)"></div>
-				<div class="row clearfix">
+				<div class="clearfix row">
 					<div class="title-column col-lg-6 col-md-12 col-sm-12">
 						<div class="title">2021 Collection</div>
 						<h2>mens Black Meta Sunglass</h2>
@@ -747,7 +745,7 @@
                     </ul>
                 </div>
 
-                <div class="filter-list row clearfix">
+                <div class="clearfix filter-list row">
 
 					<!-- Shop Item -->
 					<div class="shop-item mix music photography col-lg-3 col-md-6 col-sm-12">
@@ -755,7 +753,7 @@
 							<div class="image">
 								<a href="shop-detail.html"><img src="images/resource/products/17.png" alt="" /></a>
 								<span class="tag flaticon-heart"></span>
-								<div class="cart-box text-center">
+								<div class="text-center cart-box">
 									<a class="cart" href="#">Add to Cart</a>
 								</div>
 							</div>
@@ -787,7 +785,7 @@
 							<div class="image">
 								<a href="shop-detail.html"><img src="images/resource/products/18.png" alt="" /></a>
 								<span class="tag flaticon-heart"></span>
-								<div class="cart-box text-center">
+								<div class="text-center cart-box">
 									<a class="cart" href="#">Add to Cart</a>
 								</div>
 							</div>
@@ -819,7 +817,7 @@
 							<div class="image">
 								<a href="shop-detail.html"><img src="images/resource/products/19.png" alt="" /></a>
 								<span class="tag flaticon-heart"></span>
-								<div class="cart-box text-center">
+								<div class="text-center cart-box">
 									<a class="cart" href="#">Add to Cart</a>
 								</div>
 							</div>
@@ -851,7 +849,7 @@
 							<div class="image">
 								<a href="shop-detail.html"><img src="images/resource/products/20.png" alt="" /></a>
 								<span class="tag flaticon-heart"></span>
-								<div class="cart-box text-center">
+								<div class="text-center cart-box">
 									<a class="cart" href="#">Add to Cart</a>
 								</div>
 							</div>
@@ -883,7 +881,7 @@
 							<div class="image">
 								<a href="shop-detail.html"><img src="images/resource/products/21.png" alt="" /></a>
 								<span class="tag flaticon-heart"></span>
-								<div class="cart-box text-center">
+								<div class="text-center cart-box">
 									<a class="cart" href="#">Add to Cart</a>
 								</div>
 							</div>
@@ -915,7 +913,7 @@
 							<div class="image">
 								<a href="shop-detail.html"><img src="images/resource/products/22.png" alt="" /></a>
 								<span class="tag flaticon-heart"></span>
-								<div class="cart-box text-center">
+								<div class="text-center cart-box">
 									<a class="cart" href="#">Add to Cart</a>
 								</div>
 							</div>
@@ -947,7 +945,7 @@
 							<div class="image">
 								<a href="shop-detail.html"><img src="images/resource/products/23.png" alt="" /></a>
 								<span class="tag flaticon-heart"></span>
-								<div class="cart-box text-center">
+								<div class="text-center cart-box">
 									<a class="cart" href="#">Add to Cart</a>
 								</div>
 							</div>
@@ -979,7 +977,7 @@
 							<div class="image">
 								<a href="shop-detail.html"><img src="images/resource/products/24.png" alt="" /></a>
 								<span class="tag flaticon-heart"></span>
-								<div class="cart-box text-center">
+								<div class="text-center cart-box">
 									<a class="cart" href="#">Add to Cart</a>
 								</div>
 							</div>
@@ -1008,7 +1006,7 @@
 				</div>
 
 				<!-- Button Box -->
-				<div class="button-box text-center">
+				<div class="text-center button-box">
 					<a href="shop.html" class="theme-btn btn-style-one">
 						Shop Now <span class="icon flaticon-right-arrow"></span>
 					</a>
@@ -1135,7 +1133,7 @@
 					<!-- Testimonial Block -->
 					<div class="testimonial-block">
 						<div class="inner-box">
-							<div class="row clearfix">
+							<div class="clearfix row">
 								<!-- Image Column -->
 								<div class="image-column col-lg-4 col-md-12 col-sm-12">
 									<div class="inner-column">
@@ -1173,7 +1171,7 @@
 					<!-- Testimonial Block -->
 					<div class="testimonial-block">
 						<div class="inner-box">
-							<div class="row clearfix">
+							<div class="clearfix row">
 								<!-- Image Column -->
 								<div class="image-column col-lg-4 col-md-12 col-sm-12">
 									<div class="inner-column">

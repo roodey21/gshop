@@ -96,7 +96,7 @@ class CartController extends Controller
         $destination = request('subdistrict');
         $destinationType = 'subdistrict';
         $weight = 1000;
-        $courier = Courier::where('status', 1)->pluck('code')->implode(':');
+        $courier = Courier::where('code', '!=', 'adt')->where('status', 1)->pluck('code')->implode(':');
         // get data from api rajaongkir
         if (env('APP_ENV') == 'local') {
             $response = Http::withoutVerifying()->post('https://pro.rajaongkir.com/api/cost', [

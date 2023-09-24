@@ -87,6 +87,7 @@ class Product extends Model implements HasMedia
 
     public function getAverageRatingAttribute()
     {
-        return 'nanti';
+        // get average rating from relation reviews() if product havent reviewed yet, return 5
+        return $this->reviews()->where('is_displayed', 1)->avg('rating') ?: 5;
     }
 }

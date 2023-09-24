@@ -3,7 +3,7 @@
     <section class="page-title">
         <div class="auto-container">
 			<h2>Detail Produk</h2>
-			<ul class="bread-crumb clearfix">
+			<ul class="clearfix bread-crumb">
 				<li><a href="{{ route('shop.index') }}">Home</a></li>
 				<li><a href="{{ route('shop.product.index') }}">Produk</a></li>
 				<li>Detail Produk</li>
@@ -17,7 +17,7 @@
 		<div class="auto-container">
 			<!-- Upper Box -->
 			<div class="upper-box">
-				<div class="row clearfix">
+				<div class="clearfix row">
 					<!-- Gallery Column -->
 					<div class="gallery-column col-lg-6 col-md-12 col-sm-12">
 						<div class="inner-column">
@@ -69,25 +69,25 @@
 							<h3>{{ $product->name }}</h3>
 							<!-- Rating -->
 							<div class="rating">
-								<span class="fa fa-star"></span>
-								<span class="fa fa-star"></span>
-								<span class="fa fa-star"></span>
-								<span class="fa fa-star"></span>
-								<span class="light fa fa-star"></span>
-								<i>(4 customer review)</i>
+                                @for ($i = 0; $i < 5; $i++)
+								    <span class="{{ $i > $product->average_rating ? 'light':'' }} fa fa-star"></span>
+                                @endfor
+								<i>({{ $product->reviews->count() }} customer review)</i>
 							</div>
 							<!-- Price -->
-							<div class="price">{{ $product->formatted_price }} <span>{{ $product->formatted_price }}</span> <i>-34%</i></div>
+							<div class="price">{{ $product->discount > 0 ? $product->formatted_discount : $product->formatted_price }} <span>{{ $product->discount > 0 ? $product->formatted_price : '' }}</span>
+                                {{-- <i>-34%</i> --}}
+                            </div>
 							<div class="text">
                                 {!! $product->description !!}
                             </div>
-							{{-- <div class="d-flex flex-wrap">
+							{{-- <div class="flex-wrap d-flex">
 								<!-- Model -->
 								<div class="model">
 									<span class="model-title">Model :</span>
 								</div>
 								<!-- Select Size -->
-								<div class="select-size-box clearfix">
+								<div class="clearfix select-size-box">
 									<div class="select-box"><input type="radio" name="payment-group" id="radio-one" checked><label for="radio-one">tyk</label></div>
 									<div class="select-box"><input type="radio" name="payment-group" id="radio-two"><label for="radio-two">ffd2</label></div>
 									<div class="select-box"><input type="radio" name="payment-group" id="radio-three"><label for="radio-three">23tt</label></div>
@@ -111,7 +111,7 @@
 								<li><a href="https://www.linkedin.com/" class="fa fa-linkedin"></a></li>
 							</ul>
 
-							<div class="d-flex align-items-center flex-wrap">
+							<div class="flex-wrap d-flex align-items-center">
 
 								<!-- Button Box -->
 								<div class="button-box">
@@ -143,7 +143,7 @@
 					<div class="prod-tabs tabs-box">
 
 						<!-- Tab Btns -->
-						<ul class="tab-btns tab-buttons clearfix">
+						<ul class="clearfix tab-btns tab-buttons">
 							<li data-tab="#prod-details" class="tab-btn active-btn">Product Details</li>
 							{{-- <li data-tab="#prod-info" class="tab-btn">additional information</li>
 							<li data-tab="#prod-review" class="tab-btn">Review (02)</li> --}}
@@ -178,7 +178,7 @@
 										<div class="comment">
 											<div class="author-thumb"><img src="images/resource/author-1.jpg" alt=""></div>
 											<div class="comment-inner">
-												<div class="comment-info clearfix">Steven Rich – March 17, 2022:</div>
+												<div class="clearfix comment-info">Steven Rich – March 17, 2022:</div>
 												<div class="rating">
 													<span class="fa fa-star"></span>
 													<span class="fa fa-star"></span>
@@ -195,7 +195,7 @@
 										<div class="comment">
 											<div class="author-thumb"><img src="images/resource/author-2.jpg" alt=""></div>
 											<div class="comment-inner">
-												<div class="comment-info clearfix">William Cobus – April 21, 2022:</div>
+												<div class="clearfix comment-info">William Cobus – April 21, 2022:</div>
 												<div class="rating">
 													<span class="fa fa-star"></span>
 													<span class="fa fa-star"></span>
@@ -242,7 +242,7 @@
 										</div>
 									</div>
 									<form method="post" action="contact.html">
-										<div class="row clearfix">
+										<div class="clearfix row">
 											<div class="col-md-6 col-sm-6 col-xs-12 form-group">
 												<label>First Name *</label>
 												<input type="text" name="username" placeholder="" required>

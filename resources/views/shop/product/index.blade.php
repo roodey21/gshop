@@ -73,11 +73,9 @@
                                         </div>
                                         <div class="lower-content">
                                             <div class="rating">
-                                                <span class="fa fa-star"></span>
-                                                <span class="fa fa-star"></span>
-                                                <span class="fa fa-star"></span>
-                                                <span class="fa fa-star"></span>
-                                                <span class="light fa fa-star"></span>
+                                                @for ($i = 0; $i < 5; $i++)
+                                                    <span class="{{ $i > $product->average_rating ? 'light':'' }} fa fa-star"></span>
+                                                @endfor
                                             </div>
                                             <h6><a
                                                     href="{{ route('shop.product.show', $product->slug) }}">{{ $product->name }}</a>
@@ -126,7 +124,7 @@
                                 <!-- Category List -->
                                 <ul class="category-list">
                                     @foreach ($categories as $category)
-                                        <li><a href="#">{{ $category->name }} <span>({{ $category->products ? $category->products->count() : 0 }})</span></a></li>
+                                        <li><a href="{{ route('shop.product.index', ['category' => $category->id]) }}">{{ $category->name }} <span>({{ $category->products ? $category->products->count() : 0 }})</span></a></li>
                                     @endforeach
                                 </ul>
 

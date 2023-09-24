@@ -6,10 +6,10 @@
 
         <!-- Widgets Section -->
         <div class="widgets-section">
-            <div class="row clearfix">
+            <div class="clearfix row">
                 <!-- Column -->
                 <div class="big-column col-lg-7 col-md-12 col-sm-12">
-                    <div class="row clearfix">
+                    <div class="clearfix row">
 
                         <!-- Footer Column -->
                         <div class="footer-column col-lg-7 col-md-6 col-sm-12">
@@ -25,7 +25,7 @@
                         </div>
 
                         <!-- Footer Column -->
-                        <div class="footer-column col-lg-5 col-md-6 col-sm-12">
+                        {{-- <div class="footer-column col-lg-5 col-md-6 col-sm-12">
                             <div class="footer-widget links-widget">
                                 <h5>Find It Fast</h5>
                                 <ul class="page-list">
@@ -36,25 +36,23 @@
                                     <li><a href="#">TV & Audio</a></li>
                                 </ul>
                             </div>
-                        </div>
+                        </div> --}}
 
                     </div>
                 </div>
 
                 <!-- Column -->
                 <div class="big-column col-lg-5 col-md-12 col-sm-12">
-                    <div class="row clearfix">
+                    <div class="clearfix row">
 
                         <!-- Footer Column -->
                         <div class="footer-column col-lg-7 col-md-6 col-sm-12">
                             <div class="footer-widget links-widget">
                                 <h5>Quick Links</h5>
                                 <ul class="page-list">
-                                    <li><a href="#">Your Account</a></li>
-                                    <li><a href="#">Returns & Exchanges</a></li>
-                                    <li><a href="#">Return Center</a></li>
-                                    <li><a href="#">Purchase Hisotry</a></li>
-                                    <li><a href="#">App Download</a></li>
+                                    @foreach ($categories as $category)
+                                    <li><a href="{{ route('shop.product.index', ['category' => $category->id]) }}" class="text-capitalize">{{ strtolower($category->name) }}</a></li>
+                                    @endforeach
                                 </ul>
                             </div>
                         </div>
@@ -64,11 +62,11 @@
                             <div class="footer-widget instagram-widget">
                                 <h5>Service us</h5>
                                 <ul class="page-list-two">
-                                    <li><a href="#">Support Center</a></li>
-                                    <li><a href="#">Term & Conditions</a></li>
-                                    <li><a href="#">Shipping</a></li>
+                                    <li><a href="{{ route('shop.contact') }}">Support Center</a></li>
+                                    {{-- <li><a href="#">Term & Conditions</a></li> --}}
+                                    <li><a href="{{ route('shop.cek-ongkir') }}">Cek Ongkos Kirim</a></li>
                                     <li><a href="#">Privacy Policy</a></li>
-                                    <li><a href="#">Help</a></li>
+                                    <li><a href="{{ route('shop.contact') }}">Bantuan</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -81,7 +79,7 @@
 
         <!-- Footer Bottom -->
         <div class="footer-bottom">
-            <div class="d-flex justify-content-between align-items-center flex-wrap">
+            <div class="flex-wrap d-flex justify-content-between align-items-center">
                 <div class="copyright"><span>&copy; 2023</span> by {{ $web_setting->name }}. All Rights Reserved.</div>
                 {{-- <div class="email-box">
                     <a href="mailto:DumTheme@gmail.com"><span class="icon flaticon-mail"></span>DumTheme@gmail.com</a>
