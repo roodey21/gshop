@@ -36,7 +36,7 @@
     <!-- Featured Section -->
     <section class="featured-section">
         <div class="vector-layer" style="background-image: url({{ asset('shop/images/icons/vector-1.png') }})"></div>
-        <div class="vector-layer-two" style="background-image: url({{ asset('shop/images/icons/feature.png') }})"></div>
+        <div class="vector-layer-two" style="background-image: url({{ asset('shop/images/icons/gerabah-senik.png') }})"></div>
         <div class="auto-container">
             <div class="inner-container">
                 <div class="clearfix row">
@@ -148,21 +148,21 @@
         <div class="outer-container">
             <div class="animation_mode">
                 <h1>Design Unik</span>. <strong>Kualitas Menarik</strong></h1>
-                <img src="{{ asset('shop/images/icons/icon-1.png') }}" alt="" />
+                <img src="{{ asset('shop/images/image-left.jpg') }}" alt="" width="88" height="84"/>
                 <img src="{{ asset('shop/images/icons/gerabah-senik.png') }}" alt="" width="115px" height="115px"/>
-                <img src="{{ asset('shop/images/icons/icon-2.png') }}" alt="" />
+                <img src="{{ asset('shop/images/image-right.jpg') }}" alt=""  width="88" height="84"/>
                 <h1>Design Unik</span>. <strong>Kualitas Menarik</strong></h1>
-                <img src="{{ asset('shop/images/icons/icon-1.png') }}" alt="" />
+                <img src="{{ asset('shop/images/image-left.jpg') }}" alt="" width="88" height="84"/>
                 <img src="{{ asset('shop/images/icons/gerabah-senik.png') }}" alt="" width="115px" height="115px"/>
-                <img src="{{ asset('shop/images/icons/icon-2.png') }}" alt="" />
+                <img src="{{ asset('shop/images/image-right.jpg') }}" alt=""  width="88" height="84"/>
                 <h1>Design Unik</span>. <strong>Kualitas Menarik</strong></h1>
-                <img src="{{ asset('shop/images/icons/icon-1.png') }}" alt="" />
+                <img src="{{ asset('shop/images/image-left.jpg') }}" alt="" width="88" height="84"/>
                 <img src="{{ asset('shop/images/icons/gerabah-senik.png') }}" alt="" width="115px" height="115px"/>
-                <img src="{{ asset('shop/images/icons/icon-2.png') }}" alt="" />
+                <img src="{{ asset('shop/images/image-right.jpg') }}" alt=""  width="88" height="84"/>
                 <h1>Design Unik</span>. <strong>Kualitas Menarik</strong></h1>
-                <img src="{{ asset('shop/images/icons/icon-1.png') }}" alt="" />
+                <img src="{{ asset('shop/images/image-left.jpg') }}" alt="" width="88" height="84"/>
                 <img src="{{ asset('shop/images/icons/gerabah-senik.png') }}" alt="" width="115px" height="115px"/>
-                <img src="{{ asset('shop/images/icons/icon-2.png') }}" alt="" />
+                <img src="{{ asset('shop/images/image-right.jpg') }}" alt=""  width="88" height="84"/>
             </div>
         </div>
     </section>

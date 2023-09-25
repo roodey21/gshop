@@ -105,7 +105,7 @@
 						</div>
 
 						<!-- Shipping Total Outer -->
-						<div class="shipping-outer">
+						{{-- <div class="shipping-outer">
 							<!-- Title Box -->
 							<div class="title-box">
 								<h6>Cek Ongkir Kamu Disini</h6>
@@ -141,7 +141,7 @@
 									</button>
 								</div>
 							</form>
-						</div>
+						</div> --}}
 
 					</div>
 				</div>

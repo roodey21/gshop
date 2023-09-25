@@ -53,7 +53,7 @@ class User extends Authenticatable
     {
         $total = 0;
         foreach ($this->carts as $cart) {
-            $price = $cart->product->discount > 0 ? $cart->product->discount : $cart->product->pprice;
+            $price = $cart->product->discount > 0 ? $cart->product->discount : $cart->product->price;
             $total += ($price* $cart->qty);
         }
         return number_format($total, 0, ',', ',');
