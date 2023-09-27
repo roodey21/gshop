@@ -8,8 +8,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
 
-<link rel="shortcut icon" href="{{ asset('shop/images/favicon.png') }}" type="image/x-icon">
-<link rel="icon" href="{{ asset('shop/images/favicon.png') }}" type="image/x-icon">
+<link rel="shortcut icon" href="{{ asset('shop/images/favicon/favicon.ico') }}" type="image/x-icon">
+<link rel="icon" href="{{ asset('shop/images/favicon/favicon.ico') }}" type="image/x-icon">
 <link rel="stylesheet" href="{{ asset('shop/sweetalert/sweetalert2.min.css') }}">
 <style>
     h2.swal2-title {

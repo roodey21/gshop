@@ -18,10 +18,10 @@
                     </div>
 
                     <!-- Logo -->
-                    <div class="logo"><a href="index.html"><img src="images/logo.png" alt=""
+                    <div class="logo"><a href="{{ route('shop.index') }}"><img src="{{ asset('shop/images/favicon/favicon.ico') }}" alt=""
                                 title=""></a></div>
                 </div>
-                <div class="nav-outer clearfix">
+                <div class="clearfix nav-outer">
 
                     <!-- Main Menu -->
                     <nav class="main-menu show navbar-expand-md">
@@ -35,8 +35,8 @@
                             </button>
                         </div>
 
-                        <div class="navbar-collapse collapse clearfix" id="navbarSupportedContent">
-                            <ul class="navigation clearfix">
+                        <div class="clearfix navbar-collapse collapse" id="navbarSupportedContent">
+                            <ul class="clearfix navigation">
                                 <li><a href="{{ route('shop.index') }}">Home</a></li>
                                 <li><a href="{{ route('shop.product.index') }}">Produk</a></li>
                                 <li><a href="{{ route('shop.about') }}">About</a></li>

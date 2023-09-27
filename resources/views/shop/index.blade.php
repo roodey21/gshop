@@ -107,7 +107,7 @@
                             @csrf
                             <div class="image">
                                 <a href="#"><img src="{{ $product->thumbnail }}" alt="" /></a>
-                                <span class="tag flaticon-heart"></span>
+                                {{-- <span class="tag flaticon-heart"></span> --}}
                                 <div class="text-center cart-box">
                                     <a class="cart" onclick="$(this).closest('form').submit()">Add to Cart</a>
                                 </div>
